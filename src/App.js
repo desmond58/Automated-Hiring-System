@@ -1,25 +1,72 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
 
-function App() {
+import Home from "./Home";
+import Big5 from "./Big5Personalities";
+import PersonalDetails from './PersonalDetails'
+
+const App = () => {
+
+  const [position, setPosition] = useState("");
+  const [formData, setFormData] = useState({});
+
+  const [step,setStep] = useState(1);
+
+  const handleSaveFormData = (data) => {
+    setFormData({ ...formData, ...data});
+  };
+
+  const handleNext = () => {
+    setStep(step + 1);
+  }
+
+  const handleBack = () => {
+    setStep(step - 1);
+  };
+
+  const handlePositionChange = (selectedPosition) => {
+    setPosition(selectedPosition);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+    <>
+
+    {step === 1 && (
+      <Home onSaveFormData = {handleSaveFormData} 
+      onNext = {handleNext} 
+      onBack = {handleBack} 
+      step = {step} />
+    )}
+
+    {step === 2 && (
+      <PersonalDetails step = {step}
+      onSaveFormData = {handleSaveFormData}
+      onNext = {handleNext}
+      setStep = {setStep} />
+    )}
+
+    {step === 3 && (
+      <Big5 onSaveFormData = {handleSaveFormData}
+      onNext = {handleNext}
+      onBack = {handleBack}
+      onPositionChange = {handlePositionChange} />
+
+    )}
+
+
+    {/* <Router>
+      <Routes>
+      <Route path = '/' element = {<Home />} />
+      <Route path = '/Big5' element = {<Big5 />} />
+      <Route path = '/PersonalDetails' element = {<PersonalDetails />} />
+
+      </Routes>
+     
+    </Router> */}
+    </>
+  )
 }
+
+
 
 export default App;
