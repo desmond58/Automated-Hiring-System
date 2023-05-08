@@ -1,31 +1,44 @@
 import React from "react";
-import './index.css';
-import logo from "./images/huachanglogo.png";
+import '../index.css';
+import logo from "../images/huachanglogo.png";
 import { useNavigate } from "react-router-dom";
-import { MDBBtn, MDBContainer, MDBRadio } from "mdb-react-ui-kit";
+import { 
+  MDBBtn, 
+  MDBContainer, 
+  MDBRadio,
+  MDBRow, 
+  MDBCol,
+  MDBNavbar,
+  MDBNavbarBrand
+ } from "mdb-react-ui-kit";
 
-const Big5 = ({step, setStep, formData, setFormData}) => {
+const Big5 = (props) => {
 
-  return (
-<>
-    <div class="navbar">
-        <ul class="nav-list">
-            <div class="logo">
-                <a href='./'>
-                 <img src= {logo} />
-                 </a>
-            </div>
-                   
-        </ul>
-  
-    </div>
+  const backHandler = () => {
+    props.onBack();
+  }
+
+ return (
+ <>
+    <MDBNavbar sticky bgColor='#F1FFEB'>
+        <MDBContainer className='justify-content-center'>
+          <MDBNavbarBrand href='#'>
+            <img
+              src={logo}
+              height='100'
+              alt=''
+              loading='lazy'
+            />
+          </MDBNavbarBrand>
+        </MDBContainer>
+      </MDBNavbar>
 
     <MDBContainer className="">
       <div style={{margin:'50px'}}>
 
-      <h2><b>Big Five Personalities Test</b></h2>
-      <p>Please fill out the form below to test which position is best for you.</p>
-    <hr />
+       <h2><b>Big Five Personalities Test</b></h2>
+       <p>Please fill out the form below to test which position is best for you.</p>
+       <hr />
         <form className="bg-white mt-3" action="">
           <p>
           1. Am the life of the party.           </p>
@@ -40,6 +53,8 @@ const Big5 = ({step, setStep, formData, setFormData}) => {
           </div>
         </form>
 
+        <br></br>
+
         <form className="bg-white mt-3" action="">
           <p>
           2. Feel little concern for others          </p>
@@ -53,6 +68,8 @@ const Big5 = ({step, setStep, formData, setFormData}) => {
             <div className="d-inline mx-3">Agree</div>
           </div>
         </form>
+
+        <br></br>
 
         <form className="bg-white mt-3" action="">
           <p>
@@ -724,13 +741,26 @@ const Big5 = ({step, setStep, formData, setFormData}) => {
           </div>
         </form>
 
+        <br></br><br></br>
+
+      <div class="d-flex justify-content-center">
+        <MDBRow>
+          <MDBCol>
+          <MDBBtn onClick={backHandler}>Back</MDBBtn>
+          </MDBCol>
+          <MDBCol>
+          <MDBBtn>Submit</MDBBtn>
+          </MDBCol>
+        </MDBRow>
+      </div>
+      
+    </div>
+    </MDBContainer>
 
         
-        <div className="text-end">
-          <MDBBtn>Home</MDBBtn>
-        </div>
-      </div>
-    </MDBContainer>
+          
+        
+      
 </>
   );
 }

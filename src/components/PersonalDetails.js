@@ -1,8 +1,9 @@
 import React, {useRef, useState} from 'react';
-import logo from './images/huachanglogo.png';
-
-import Popup from "./Popup";
+import logo from '../images/huachanglogo.png';
 import {
+  MDBContainer,
+  MDBNavbar,
+  MDBNavbarBrand,
   MDBRow,
   MDBCol,
   MDBInput,
@@ -28,16 +29,16 @@ const PersonalDetails = ({step, setStep, formData, setFormData}) => {
 
     const [showPopup, setShowPopup] = useState(false);
 
-    const handleNext = () => {
-      setShowPopup(true)
-    }
-
     const backhandler = () => {
       setStep(1);
     }
 
     const handleNOClick = () => {
       setStep(3);
+    }
+
+    const handleYESClick = () => {
+      setStep(4);
     }
     
     const [basicModal, setBasicModal] = useState(false);
@@ -50,26 +51,21 @@ const PersonalDetails = ({step, setStep, formData, setFormData}) => {
     
 
   return (
-
   <>
-  
-  <body>
-  <div class="navbar">
-        <ul class="nav-list">
-            <div class="logo">
-                <a href='./'>
-                 <img src= {logo} />
-                 </a>
-            </div>
-                   
-        </ul>
-  
-            <div class="rightNav">
-              <h1>Personal Details</h1>
-            </div>
-    </div>
+   <MDBNavbar sticky bgColor='#F1FFEB'>
+        <MDBContainer className='justify-content-center'>
+          <MDBNavbarBrand href='#'>
+            <img
+              src={logo}
+              height='100'
+              alt=''
+              loading='lazy'
+            />
+          </MDBNavbarBrand>
+        </MDBContainer>
+      </MDBNavbar>
 
-    <div style={{margin:'100px'}}>
+    <div style={{margin:'100px', marginTop:'50px'}}>
      <form>
       <h2><b>Personal Details</b></h2>
       <p>Please TICK and provide necessary information</p>
@@ -369,16 +365,18 @@ const PersonalDetails = ({step, setStep, formData, setFormData}) => {
     <br></br><br></br>
 
     <div class="d-flex justify-content-center">
-    <MDBRow>
-    <MDBCol>
-      <MDBBtn className='mb-4' onClick={backhandler} color='primary' >
+     <MDBRow>
+      <MDBCol>
+       <MDBBtn className='mb-4' onClick={backhandler} color='primary' >
         Back
-      </MDBBtn>
+       </MDBBtn>
       </MDBCol>
       <MDBCol>
-      <MDBBtn className='mb-4' type='button' onClick={toggleShow} color='primary'>
+       <MDBBtn className='mb-4' type='button' onClick={toggleShow} color='primary'>
         Next
-      </MDBBtn>
+       </MDBBtn>
+      </MDBCol>
+     </MDBRow>
 
       <MDBModal show={basicModal} setShow={setBasicModal} tabIndex='-1'>
         <MDBModalDialog>
@@ -396,15 +394,15 @@ const PersonalDetails = ({step, setStep, formData, setFormData}) => {
             </MDBTooltip>
 
             <MDBTooltip tag='a' title = "Proceed to next step.">  
-            <MDBBtn color='green'>Yes</MDBBtn>
+            <MDBBtn color='green' onClick={handleYESClick}>Yes</MDBBtn>
             </MDBTooltip>
             </MDBModalFooter>
           </MDBModalContent>
         </MDBModalDialog>
       </MDBModal>
 
-      </MDBCol>
-      </MDBRow>
+      
+      
 
       
 
@@ -412,7 +410,6 @@ const PersonalDetails = ({step, setStep, formData, setFormData}) => {
       </div>
     </form>
     </div>
-    </body>
 
     <MDBFooter style={{ backgroundColor: "#F1FFEB" }}>
     <div className='text-center p-4' style={{ backgroundColor: 'rgba(0, 0, 0, 0.05)' }}>

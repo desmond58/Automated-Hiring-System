@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 
-import Home from "./Home";
-import Big5 from "./Big5Personalities";
-import PersonalDetails from './PersonalDetails'
+import Home from "./components/Home"
+import Big5 from "./components/Big5Personalities"
+import PersonalDetails from './components/PersonalDetails'
+import PositionForm from './components/PositionForm'
+import MarketingConsultant from "./components/MarketingConsultant"
+import BusinessAdministrative from "./components/BusinessAdmin";
+import Confirmation from "./components/Confirmation"
 
 const App = () => {
 
@@ -22,6 +26,10 @@ const App = () => {
   const handleBack = () => {
     setStep(step - 1);
   };
+
+  const handlePositionForm = () => {
+    setStep(step - 2);
+  }
 
   const handlePositionChange = (selectedPosition) => {
     setPosition(selectedPosition);
@@ -52,6 +60,40 @@ const App = () => {
       onPositionChange = {handlePositionChange} />
 
     )}
+
+    {step === 4 && (
+      <PositionForm 
+      onSaveFormData = {handleSaveFormData}
+      onNext = {handleNext}
+      onBack = {handlePositionForm}
+      onPositionChange = {handlePositionChange} />
+    )}
+
+    {step === 5 && position === "Marketing Coordinator" &&(
+      <MarketingConsultant onPositionChange={handlePositionChange} 
+      onSaveFormData={handleSaveFormData}
+      onNext={handleNext}
+      onBack={handleBack}   /> 
+    )}
+
+    {step === 5 && position === "Business Administrative" &&(
+      <BusinessAdministrative onPositionChange={handlePositionChange} 
+      onSaveFormData={handleSaveFormData}
+      onNext={handleNext}
+      onBack={handleBack}   /> 
+    )}
+
+
+
+    { step === 7 && (
+      <Confirmation  onPositionChange={handlePositionChange} 
+      onSaveFormData={handleSaveFormData}
+      onNext={handleNext}
+      onBack={handleBack}
+      />
+
+    )}
+
 
 
     {/* <Router>

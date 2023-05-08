@@ -1,21 +1,19 @@
 import React, {useState} from 'react';
-import './index.css';
-import logo from './images/huachanglogo.png';
-
+import '../index.css';
+import logo from '../images/huachanglogo.png';
 import { 
   MDBFooter, 
   MDBContainer,
   MDBRow, 
   MDBCol, 
   MDBIcon,
-  MDBNavbar,
-  MDBNavbarNav,
-  MDBNavbarItem,
-  MDBNavbarLink,
-  MDBNavbarToggler,
   MDBBtn,
-  MDBCollapse
+  MDBNavbar,
+  MDBNavbarBrand,
+  MDBInputGroup,
+  MDBInput
 } from 'mdb-react-ui-kit';
+
 
 const Home = (props) => {
     const [statusId, setStatusId] = useState('');
@@ -37,22 +35,28 @@ const Home = (props) => {
   return (
     <form onSubmit={handleTrackSubmit}>
     <>
-    <div class="navbar">
-        <ul class="nav-list">
-            <div class="logo">
-                <a href='./'>
-                 <img src= {logo} />
-                 </a>
-            </div>
-                   
-        </ul>
-  
-            <div class="rightNav">
-                <input type="text" name="track" id="track" placeholder='Track ID'
-                 value = {statusId} onChange={(e) => setStatusId(e.target.value)} />
-                <button class="btn btn-sm" style={{backgroundColor:'black', color:'white'}}>Track</button>
-            </div>
-    </div>
+    <MDBNavbar light bgColor='#F1FFEB'>
+      
+      <MDBContainer fluid>
+        <MDBNavbarBrand>
+        <img
+              src={logo}
+              height='100'
+              alt=''
+              loading='lazy'
+            />
+            </MDBNavbarBrand>
+            <MDBInputGroup tag="form" className='d-flex w-auto mb-3'>
+             <MDBInput type="text" name="track" id="track" placeholder='Track ID'
+                value = {statusId} onChange={(e) => setStatusId(e.target.value)}/>
+             <button class="btn btn-sm" style={{ color:'black'}}>
+              <MDBIcon icon = 'search'></MDBIcon>
+             </button>
+            </MDBInputGroup>
+
+      </MDBContainer>
+
+    </MDBNavbar>
 
 
      <body>
