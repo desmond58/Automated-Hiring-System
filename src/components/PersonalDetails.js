@@ -72,28 +72,30 @@ const PersonalDetails = ({step, setStep, formData, setFormData}) => {
     <hr />
       <MDBRow className='mb-4'>
         <MDBCol>
-          <MDBInput id='form6Example1' label='First name' />
+          <MDBInput id='firstName' label='First name' />
         </MDBCol>
         <MDBCol>
-          <MDBInput id='form6Example2' label='Middle name' />
+          <MDBInput id='middleName' label='Middle name' />
         </MDBCol>
         <MDBCol>
-          <MDBInput id='form6Example2' label='Last name' />
+          <MDBInput id='lastName' label='Last name' />
         </MDBCol>
       </MDBRow>
 
       <MDBRow className='mb-4'>
         <MDBCol>
           <p>Gender</p>
-          <MDBRadio name="flexRadioDefault" id="flexRadioDefault1" label="Male" inline defaultChecked/>
-          <MDBRadio name="flexRadioDefault" id="flexRadioDefault1" label="Female" inline defaultChecked/>
-        </MDBCol>
+          <form>
+          <MDBRadio name="genderRadio" id="genderMale" label="Male" inline defaultChecked/>
+          <MDBRadio name="genderRadio" id="genderFemale" label="Female" inline defaultChecked/>
+          </form>        
+          </MDBCol>
         <MDBCol>
         <p>Date Of Birth</p>
-        <MDBInput id='form6Example1' type = "date"  />
+        <MDBInput id='dob' type = "date"  />
         </MDBCol>
         <MDBCol>
-          <MDBInput id='form6Example2' label='Age' />
+          <MDBInput id='age' label='Age' />
         </MDBCol>
         </MDBRow>
 
@@ -101,15 +103,15 @@ const PersonalDetails = ({step, setStep, formData, setFormData}) => {
       
       </MDBRow>
      
-      <MDBInput wrapperClass='mb-4' id='form6Example3' label='NRIC' />
+      <MDBInput wrapperClass='mb-4' id='nric' label='NRIC' />
       <MDBRow>
         <MDBCol>
-        <MDBInput wrapperClass='mb-4' id='form6Example4' label='Place Of Birth' />
+        <MDBInput wrapperClass='mb-4' id='pob' label='Place Of Birth' />
         </MDBCol>
         <MDBCol>
         <p>Nationality</p>
-          <MDBRadio name="flexRadioDefault" id="flexRadioDefault1" label="Malaysian" inline defaultChecked/>
-          <MDBRadio name="flexRadioDefault" id="flexRadioDefault1" label="Other" inline defaultChecked/>
+          <MDBRadio name="NationailityRadio" id="nationMalaysian" label="Malaysian" inline defaultChecked/>
+          <MDBRadio name="NationailityRadio" id="nationOther" label="Other" inline defaultChecked/>
         </MDBCol>
 
       </MDBRow>
@@ -117,20 +119,20 @@ const PersonalDetails = ({step, setStep, formData, setFormData}) => {
       <MDBRow className='mb-4'>
         <MDBCol>
           <p>Religion</p>
-          <MDBRadio name="flexRadioDefault" id="flexRadioDefault1" label="Islam" inline defaultChecked/>
-          <MDBRadio name="flexRadioDefault" id="flexRadioDefault1" label="Buddha" inline defaultChecked/>
-          <MDBRadio name="flexRadioDefault" id="flexRadioDefault1" label="Hindu" inline defaultChecked/>
-          <MDBRadio name="flexRadioDefault" id="flexRadioDefault1" label="Kristian" inline defaultChecked/>
-          <MDBRadio name="flexRadioDefault" id="flexRadioDefault1" label="Sikh" inline defaultChecked/>
-          <MDBRadio name="flexRadioDefault" id="flexRadioDefault1" label="Other" inline defaultChecked/>
+          <MDBRadio name="ReligionRadio" id="relIslam" label="Islam" inline defaultChecked/>
+          <MDBRadio name="ReligionRadio" id="relBuddha" label="Buddha" inline defaultChecked/>
+          <MDBRadio name="ReligionRadio" id="relHindu" label="Hindu" inline defaultChecked/>
+          <MDBRadio name="ReligionRadio" id="relKristian" label="Kristian" inline defaultChecked/>
+          <MDBRadio name="ReligionRadio" id="relSikh" label="Sikh" inline defaultChecked/>
+          <MDBRadio name="ReligionRadio" id="relOther" label="Other" inline defaultChecked/>
         </MDBCol>
         <MDBCol>
-        <p>Gender</p>
-          <MDBRadio name="flexRadioDefault" id="flexRadioDefault1" label="Malay" inline defaultChecked/>
-          <MDBRadio name="flexRadioDefault" id="flexRadioDefault1" label="Chinese" inline defaultChecked/>
-          <MDBRadio name="flexRadioDefault" id="flexRadioDefault1" label="Indian" inline defaultChecked/>
-          <MDBRadio name="flexRadioDefault" id="flexRadioDefault1" label="Orang Asli" inline defaultChecked/>
-          <MDBRadio name="flexRadioDefault" id="flexRadioDefault1" label="Other" inline defaultChecked/>
+        <p>Race</p>
+          <MDBRadio name="RaceRadio" id="raceMalay" label="Malay" inline defaultChecked/>
+          <MDBRadio name="RaceRadio" id="raceChinese" label="Chinese" inline defaultChecked/>
+          <MDBRadio name="RaceRadio" id="raceIndian" label="Indian" inline defaultChecked/>
+          <MDBRadio name="RaceRadio" id="raceOA" label="Orang Asli" inline defaultChecked/>
+          <MDBRadio name="RaceRadio" id="raceOther" label="Other" inline defaultChecked/>
         </MDBCol>
         </MDBRow>
         
@@ -154,41 +156,41 @@ const PersonalDetails = ({step, setStep, formData, setFormData}) => {
       <MDBTableBody>
         <tr>
           <th scope='row'>University/ College/ Technical</th>
-          <td><MDBInput id='form6Example2'/>
+          <td><MDBInput id='EstName1'/>
           </td>
-          <td><MDBInput id='form6Example2'/>
+          <td><MDBInput id='From1'/>
           </td>
-          <td><MDBInput id='form6Example2'/>
+          <td><MDBInput id='To1'/>
           </td>
-          <td><MDBInput id='form6Example2'/>
+          <td><MDBInput id='FOS1'/>
           </td>
-          <td><MDBInput id='form6Example2'/>
+          <td><MDBInput id='Qual1'/>
           </td>
         </tr>
         <tr>
           <th scope='row'>University/ College/ Technical</th>
-          <td><MDBInput id='form6Example2'/>
+          <td><MDBInput id='EstName2'/>
           </td>
-          <td><MDBInput id='form6Example2'/>
+          <td><MDBInput id='From2'/>
           </td>
-          <td><MDBInput id='form6Example2'/>
+          <td><MDBInput id='To2'/>
           </td>
-          <td><MDBInput id='form6Example2'/>
+          <td><MDBInput id='FOS2'/>
           </td>
-          <td><MDBInput id='form6Example2'/>
+          <td><MDBInput id='Qual2'/>
           </td>
         </tr>
         <tr>
           <th scope='row'>Secondary</th>
-          <td><MDBInput id='form6Example2'/>
+          <td><MDBInput id='EstName3'/>
           </td>
-          <td><MDBInput id='form6Example2'/>
+          <td><MDBInput id='From3'/>
           </td>
-          <td><MDBInput id='form6Example2'/>
+          <td><MDBInput id='To3'/>
           </td>
-          <td><MDBInput id='form6Example2'/>
+          <td><MDBInput id='FOS3'/>
           </td>
-          <td><MDBInput id='form6Example2'/>
+          <td><MDBInput id='Qual3'/>
           </td>
         </tr>
       </MDBTableBody>
@@ -200,8 +202,8 @@ const PersonalDetails = ({step, setStep, formData, setFormData}) => {
 
         <MDBRow>
         <MDBCol>
-        <MDBInput wrapperClass='mb-4' id='form6Example4' label='Language(s) Spoken ' />
-        <MDBInput wrapperClass='mb-4' id='form6Example4' label='Language(s) Written ' />
+        <MDBInput wrapperClass='mb-4' id='languageSpoken' label='Language(s) Spoken ' />
+        <MDBInput wrapperClass='mb-4' id='languageWritten' label='Language(s) Written ' />
         </MDBCol>
         </MDBRow>
 
@@ -210,7 +212,7 @@ const PersonalDetails = ({step, setStep, formData, setFormData}) => {
         <hr />
         <MDBRow>
         <MDBCol>
-        <MDBTextArea label='Please provide information on your experiences above.' placeholder='Type here...' id='textAreaExample' rows={5} />        
+        <MDBTextArea label='Please provide information on your experiences above.' placeholder='Type here...' id='textAreaWorkingSkill' rows={5} />        
         </MDBCol>
         </MDBRow>
 
@@ -220,18 +222,18 @@ const PersonalDetails = ({step, setStep, formData, setFormData}) => {
         <MDBRow>
         <MDBCol>
             <p>Current Employer</p>
-            <MDBInput wrapperClass='mb-4' id='form6Example4' label='Name of current employer or NONE if not employed ' />
+            <MDBInput wrapperClass='mb-4' id='currentEmployer' label='Name of current employer or NONE if not employed ' />
         </MDBCol>
         </MDBRow>
         <MDBRow>
         <MDBCol>
-          <MDBInput id='form6Example1' type = "date" label='Date of joining' />
+          <MDBInput id='dateofjoining' type = "date" label='Date of joining' />
         </MDBCol>
         <MDBCol>
-          <MDBInput id='form6Example2' label='Position' />
+          <MDBInput id='position' label='Position' />
         </MDBCol>
         <MDBCol>
-          <MDBInput id='form6Example2' label='Salary' />
+          <MDBInput id='salary' label='Salary' />
         </MDBCol>
         </MDBRow>
         
@@ -253,41 +255,41 @@ const PersonalDetails = ({step, setStep, formData, setFormData}) => {
       <MDBTableBody>
         <tr>
           <th scope='row'>1</th>
-          <td><MDBInput id='form6Example2'/>
+          <td><MDBInput id='nameOfEmployer1'/>
           </td>
-          <td><MDBInput id='form6Example2'/>
+          <td><MDBInput id='positionHeld1'/>
           </td>
-          <td><MDBInput id='form6Example2'/>
+          <td><MDBInput id='em_from1'/>
           </td>
-          <td><MDBInput id='form6Example2'/>
+          <td><MDBInput id='em_to1'/>
           </td>
-          <td><MDBInput id='form6Example2'/>
+          <td><MDBInput id='reasonOfLeaving1'/>
           </td>
         </tr>
         <tr>
           <th scope='row'>2</th>
-          <td><MDBInput id='form6Example2'/>
+          <td><MDBInput id='nameOfEmployer2'/>
           </td>
-          <td><MDBInput id='form6Example2'/>
+          <td><MDBInput id='positionHeld2'/>
           </td>
-          <td><MDBInput id='form6Example2'/>
+          <td><MDBInput id='em_from2'/>
           </td>
-          <td><MDBInput id='form6Example2'/>
+          <td><MDBInput id='em_to2'/>
           </td>
-          <td><MDBInput id='form6Example2'/>
+          <td><MDBInput id='reasonOfLeaving2'/>
           </td>
         </tr>
         <tr>
           <th scope='row'>3</th>
-          <td><MDBInput id='form6Example2'/>
+          <td><MDBInput id='nameOfEmployer3'/>
           </td>
-          <td><MDBInput id='form6Example2'/>
+          <td><MDBInput id='positionHeld3'/>
           </td>
-          <td><MDBInput id='form6Example2'/>
+          <td><MDBInput id='em_from3'/>
           </td>
-          <td><MDBInput id='form6Example2'/>
+          <td><MDBInput id='em_to3'/>
           </td>
-          <td><MDBInput id='form6Example2'/>
+          <td><MDBInput id='reasonOfLeaving3'/>
           </td>
         </tr>
       </MDBTableBody>
@@ -301,11 +303,11 @@ const PersonalDetails = ({step, setStep, formData, setFormData}) => {
     <MDBRow className='mb-4'>
         <MDBCol>
           <p>Health</p>
-          <MDBRadio name="flexRadioDefault" id="flexRadioDefault1" label="Good" inline defaultChecked/>
-          <MDBRadio name="flexRadioDefault" id="flexRadioDefault1" label="Bad" inline defaultChecked/>
+          <MDBRadio name="flexRadioDefault" id="flexRadioGood" label="Good" inline defaultChecked/>
+          <MDBRadio name="flexRadioDefault" id="flexRadioBad" label="Bad" inline defaultChecked/>
           </MDBCol>
           <MDBCol>
-          <MDBInput id='form6Example2' label='If chosen Bad, what are the diseases?' />
+          <MDBInput id='diseases' label='If chosen Bad, what are the diseases?' />
           </MDBCol>
           </MDBRow>
 
@@ -325,29 +327,29 @@ const PersonalDetails = ({step, setStep, formData, setFormData}) => {
       <MDBTableBody>
         <tr>
           <th scope='row'>1</th>
-          <td><MDBInput id='form6Example2'/>
+          <td><MDBInput id='rel_name1'/>
           </td>
-          <td><MDBInput id='form6Example2'/>
+          <td><MDBInput id='rel_branch1'/>
           </td>
-          <td><MDBInput id='form6Example2'/>
+          <td><MDBInput id='rel_gender1'/>
           </td>
         </tr>
         <tr>
           <th scope='row'>2</th>
-          <td><MDBInput id='form6Example2'/>
+          <td><MDBInput id='rel_name2'/>
           </td>
-          <td><MDBInput id='form6Example2'/>
+          <td><MDBInput id='rel_branch2'/>
           </td>
-          <td><MDBInput id='form6Example2'/>
+          <td><MDBInput id='rel_gender2'/>
           </td>
         </tr>
         <tr>
           <th scope='row'>3</th>
-          <td><MDBInput id='form6Example2'/>
+          <td><MDBInput id='rel_name3'/>
           </td>
-          <td><MDBInput id='form6Example2'/>
+          <td><MDBInput id='rel_branch3'/>
           </td>
-          <td><MDBInput id='form6Example2'/>
+          <td><MDBInput id='rel_gender3'/>
           </td>
         </tr>
       </MDBTableBody>
@@ -356,10 +358,10 @@ const PersonalDetails = ({step, setStep, formData, setFormData}) => {
 <br></br><br></br>
     <MDBRow>
     <MDBCol>
-        <MDBInput id='form6Example2' label='Expected Salary' />
+        <MDBInput id='expectedSalary' label='Expected Salary' />
     </MDBCol>
     <MDBCol>
-        <MDBInput id='form6Example2' label='If offered this job, when can you start work?' />
+        <MDBInput id='startWorkDate' type = 'date' label='If offered this job, when can you start work?' />
     </MDBCol>
     </MDBRow>
     <br></br><br></br>
