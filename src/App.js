@@ -4,8 +4,16 @@ import Home from "./components/Home"
 import Big5 from "./components/Big5Personalities"
 import PersonalDetails from './components/PersonalDetails'
 import PositionForm from './components/PositionForm'
+
 import MarketingConsultant from "./components/MarketingConsultant"
 import BusinessAdministrative from "./components/BusinessAdmin";
+import Sales from "./components/Sales"
+import HumanResources from "./components/HumanResources"
+import Marketing from "./components/Marketing"
+import AdminExecutive from "./components/AdminExecutive"
+import Accounting from "./components/Accounting"
+
+
 import Confirmation from "./components/Confirmation"
 
 const App = () => {
@@ -78,6 +86,41 @@ const App = () => {
 
     {step === 5 && position === "Business Administrative" &&(
       <BusinessAdministrative onPositionChange={handlePositionChange} 
+      onSaveFormData={handleSaveFormData}
+      onNext={handleNext}
+      onBack={handleBack}   /> 
+    )}
+
+   {step === 5 && position === "Sales" &&(
+      <Sales onPositionChange={handlePositionChange} 
+      onSaveFormData={handleSaveFormData}
+      onNext={handleNext}
+      onBack={handleBack}   /> 
+    )}
+
+   {step === 5 && position === "HumanResources" &&(
+      <HumanResources onPositionChange={handlePositionChange} 
+      onSaveFormData={handleSaveFormData}
+      onNext={handleNext}
+      onBack={handleBack}   /> 
+    )}
+
+  {step === 5 && position === "Marketing" &&(
+      <Marketing onPositionChange={handlePositionChange} 
+      onSaveFormData={handleSaveFormData}
+      onNext={handleNext}
+      onBack={handleBack}   /> 
+    )}
+
+  {step === 5 && position === "Admin Executive" &&(
+      <AdminExecutive onPositionChange={handlePositionChange} 
+      onSaveFormData={handleSaveFormData}
+      onNext={handleNext}
+      onBack={handleBack}   /> 
+    )}
+
+  {step === 5 && position === "Accounting" &&(
+      <Accounting onPositionChange={handlePositionChange} 
       onSaveFormData={handleSaveFormData}
       onNext={handleNext}
       onBack={handleBack}   /> 

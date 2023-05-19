@@ -84,10 +84,10 @@ const PositionForm = (props) => {
           <option value="Marketing">Marketing (Internship)</option>
           <option value="Sales">Sales (Internship)</option>
           <option value="Business Administrative">Business Administrative (Internship)</option>
-          <option value="Human Resource">Human Resource (Internship)</option>
+          <option value="HumanResources">Human Resource (Internship)</option>
+          <option value="Accounting">Accounting (Internship)</option>
           <option value="Marketing Coordinator">Marketing Coordinator</option>
           <option value="Admin Executive">Admin Executive</option>
-          <option value="Accounting">Accounting</option>
 
         </select>
         </div>
@@ -140,7 +140,8 @@ const PositionForm = (props) => {
          type="text"  
          id="input2"  
          value={input2}    
-         onChange={(event) => setInput2(event.target.value)}required
+         onChange={(event) => setInput2(event.target.value)}
+         required
          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
          />
 
