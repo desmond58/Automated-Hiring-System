@@ -12,7 +12,7 @@ import {
 import logo from '../images/huachanglogo.png';
 
 
-const BusinessAdministrative = (props) => {
+const Sales = (props) => {
   const [languageList, setLanguageList] = useState([]);
 
   const [input1, setInput1] = useState("");
@@ -68,7 +68,7 @@ const BusinessAdministrative = (props) => {
       <div style={{margin:'200px',marginTop:"50px"}}>
 
         <h2><b>Job Interest</b></h2>
-        <p>(Internship - Business Administrative)</p>
+        <p>(Internship - Sales)</p>
         <hr />
       
       <div>
@@ -134,8 +134,7 @@ const BusinessAdministrative = (props) => {
 
       <div>
         <label htmlFor="input3" className="block font-bold mb-2">
-        Name three of your important considerations when working as Business Administration?
-        </label>
+        How will you remain positive when faced with email and telephonic rejections?        </label>
         <MDBTextArea
           style={{display:"block", marginLeft:"auto", marginRight:"auto"}}
           rows = {5}
@@ -152,7 +151,8 @@ const BusinessAdministrative = (props) => {
 
       <div>
         <label htmlFor="input4" className="block font-bold mb-2">
-        Explain your largest failure during studies. How did you learn from this experience?        </label>
+        How do you keep up with sales industry trends? 
+        </label>
         <MDBTextArea
           style={{display:"block", marginLeft:"auto", marginRight:"auto"}}
           rows = {5}
@@ -169,7 +169,8 @@ const BusinessAdministrative = (props) => {
 
       <div>
         <label htmlFor="input5" className="block font-bold mb-2">
-        How do you deal with busy and stressful studies period?        </label>
+        What made you want to complete your internship at our company? 
+        </label>        
         <MDBTextArea
           style={{display:"block", marginLeft:"auto", marginRight:"auto"}}
           rows = {5}
@@ -186,7 +187,8 @@ const BusinessAdministrative = (props) => {
 
       <div>
         <label htmlFor="input6" className="block font-bold mb-2">
-        What is the responsibility as a Business Administrative?        </label>
+        What can you contribute to our company during your internship? 
+        </label>        
         <MDBTextArea
           style={{display:"block", marginLeft:"auto", marginRight:"auto"}}
           rows = {5}
@@ -199,28 +201,10 @@ const BusinessAdministrative = (props) => {
         />
       </div>
 
+      
       <br></br><br></br>
 
-      <div>
-        <label htmlFor="input7" className="block font-bold mb-2">
-          What business technologies, office software, and marketing platforms are you familiar and good in?
-        </label>
-        <MDBTextArea
-          style={{display:"block", marginLeft:"auto", marginRight:"auto"}}
-          rows = {5}
-          type="text"
-          id="input7"
-          value={input7}
-          onChange={(event) => setInput7(event.target.value)}
-          required
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-        />
-      </div>
-
-      <br></br><br></br>
-
-     
-
+    
       <br></br><br></br>
 
       <div class="d-flex justify-content-center">
@@ -238,4 +222,4 @@ const BusinessAdministrative = (props) => {
   );
 };
 
-export default BusinessAdministrative;
+export default Sales;
