@@ -369,14 +369,14 @@ const PersonalDetails = ({step, setStep, formData, setFormData}) => {
     <div class="d-flex justify-content-center">
      <MDBRow>
       <MDBCol>
-       <MDBBtn className='mb-4' onClick={backhandler} color='primary' >
+       <button className='button buttonBack' onClick={backhandler}>
         Back
-       </MDBBtn>
+       </button>
       </MDBCol>
       <MDBCol>
-       <MDBBtn className='mb-4' type='button' onClick={toggleShow} color='primary'>
+       <button className='button buttonNext' type='button' onClick={toggleShow} color='primary'>
         Next
-       </MDBBtn>
+       </button>
       </MDBCol>
      </MDBRow>
 
@@ -392,24 +392,18 @@ const PersonalDetails = ({step, setStep, formData, setFormData}) => {
             <MDBModalFooter style={{justifyContent:"center"}}>
 
             <MDBTooltip tag='a' title = "Take the Big Five Personalities test to find out which position is suitable for you!">  
-            <MDBBtn color='danger' onClick={handleNOClick}>No</MDBBtn>
+            <button className='button buttonNext' color='danger' onClick={handleNOClick}>No</button>
             </MDBTooltip>
 
             <MDBTooltip tag='a' title = "Proceed to next step.">  
-            <MDBBtn color='green' onClick={handleYESClick}>Yes</MDBBtn>
+            <button className='button buttonNext' color='green' onClick={handleYESClick}>Yes</button>
             </MDBTooltip>
             </MDBModalFooter>
           </MDBModalContent>
         </MDBModalDialog>
       </MDBModal>
-
       
-      
-
-      
-
-      
-      </div>
+    </div>
     </form>
     </div>
 
