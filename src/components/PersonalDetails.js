@@ -25,30 +25,179 @@ import {
 } from 'mdb-react-ui-kit';
 import { setSelectionRange } from '@testing-library/user-event/dist/utils';
 
-const PersonalDetails = ({step, setStep, formData, setFormData}) => {
+const PersonalDetails = ({ step, setStep, onSaveFormData }) => {
+  const [formData, setFormData] = useState({
+      firstName: '',
+      middleName: '',
+      lastName: '',
+      gender: '',
+      dob: '',
+      age: '',
+      nric: '',
+      pob: '',
+      nationality: '',
+      religion: '',
+      race: '',
+      estName1: '',
+      from1: '',
+      to1: '',
+      fos1: '',
+      qual1: '',
+      estName2: '',
+      from2: '',
+      to2: '',
+      fos2: '',
+      qual2: '',
+      estName3: '',
+      from3: '',
+      to3: '',
+      fos3: '',
+      qual3: '',
+      languageSpoken: '',
+      languageWritten: '',
+      textAreaWorkingSkill: '',
+      currentEmployer: '',
+      dateofjoining: '',
+      position: '',
+      salary: '',
+      nameOfEmployer1: '',
+      positionHeld1: '',
+      em_from1: '',
+      em_to1: '',
+      reasonOfLeaving1: '',
+      nameOfEmployer2: '',
+      positionHeld2: '',
+      em_from2: '',
+      em_to2: '',
+      reasonOfLeaving2: '',
+      nameOfEmployer3: '',
+      positionHeld3: '',
+      em_from3: '',
+      em_to3: '',
+      reasonOfLeaving3: '',
+      health: '',
+      diseases: '',
+      rel_name1: '',
+      rel_branch1: '',
+      rel_gender1: '',
+      rel_name2: '',
+      rel_branch2: '',
+      rel_gender2: '',
+      rel_name3: '',
+      rel_branch3: '',
+      rel_gender3: '',
+      expectedSalary: '',
+      startWorkDate: ''
+    });
+   
+const handleFormSubmit = (formData) => {
+  onSaveFormData(formData); // Call the onSaveFormData function with the current form data
+  setStep(4);
+};
 
-    const [showPopup, setShowPopup] = useState(false);
+  const backhandler = () => {
+    setStep(1);
+  };
 
-    const backhandler = () => {
-      setStep(1);
-    }
+  const handleNOClick = () => {
+    setStep(3);
+  };
 
-    const handleNOClick = () => {
-      setStep(3);
-    }
+  const handleYESClick = (event) => {
+    event.preventDefault();
+    const newFormData = {
+      firstName: formData.firstName,
+      middleName: formData.middleName,
+      lastName: formData.lastName,
+      gender: formData.genderRadio,
+      dob: formData.dob,
+      age: formData.age,
+      nric: formData.nric,
+      pob: formData.pob,
+      nationality: formData.nationalityRadio,
+      religion: formData.religionRadio,
+      race: formData.raceRadio,
+      estName1: formData.estName1,
+      from1: formData.from1,
+      to1: formData.to1,
+      fos1: formData.fos1,
+      qual1: formData.qual1,
+      estName2: formData.estName2,
+      from2: formData.from2,
+      to2: formData.to2,
+      fos2: formData.fos2,
+      qual2: formData.qual2,
+      estName3: formData.estName3,
+      from3: formData.from3,
+      to3: formData.to3,
+      fos3: formData.fos3,
+      qual3: formData.qual3,
+      languageSpoken: formData.languageSpoken,
+      languageWritten: formData.languageWritten,
+      textAreaWorkingSkill: formData.textAreaWorkingSkill,
+      currentEmployer: formData.currentEmployer,
+      dateofjoining: formData.dateofjoining,
+      position: formData.position,
+      salary: formData.salary,
+      nameOfEmployer1: formData.nameOfEmployer1,
+      positionHeld1: formData.positionHeld1,
+      em_from1: formData.em_from1,
+      em_to1: formData.em_to1,
+      reasonOfLeaving1: formData.reasonOfLeaving1,
+      nameOfEmployer2: formData.nameOfEmployer2,
+      positionHeld2: formData.positionHeld2,
+      em_from2: formData.em_from2,
+      em_to2: formData.em_to2,
+      reasonOfLeaving2: formData.reasonOfLeaving2,
+      nameOfEmployer3: formData.nameOfEmployer3,
+      positionHeld3: formData.positionHeld3,
+      em_from3: formData.em_from3,
+      em_to3: formData.em_to3,
+      reasonOfLeaving3: formData.reasonOfLeaving3,
+      health: formData.healthRadio,
+      diseases: formData.diseases,
+      rel_name1: formData.rel_name1,
+      rel_branch1: formData.rel_branch1,
+      rel_gender1: formData.rel_gender1,
+      rel_name2: formData.rel_name2,
+      rel_branch2: formData.rel_branch2,
+      rel_gender2: formData.rel_gender2,
+      rel_name3: formData.rel_name3,
+      rel_branch3: formData.rel_branch3,
+      rel_gender3: formData.rel_gender3,
+      expectedSalary: formData.expectedSalary,
+      startWorkDate: formData.startWorkDate
+    };
+  
+console.log(newFormData)
+    handleFormSubmit(newFormData,  setStep);
+  };
+  const handleInputChange = (event) => {
+    const { name, value, type, checked } = event.target;
 
-    const handleYESClick = () => {
-      setStep(4);
+    if (type === 'radio') {
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        [name]: value,
+      }));
+    } else {
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        [name]: value,
+      }));
     }
-    
-    const [basicModal, setBasicModal] = useState(false);
-    const toggleShow = () => setBasicModal(true);
-    
-    const handleClose = (e) => {
-      e.preventDefault();
-      setBasicModal(false);
-    }
-    
+  };
+  const [basicModal, setBasicModal] = useState(false);
+  const toggleShow = () => setBasicModal(true);
+
+  const handleClose = (e) => {
+    e.preventDefault();
+    setBasicModal(false);
+  };
+  const scrollContainerRef = useRef(null);
+  const scrollToBottom = () => {
+    scrollContainerRef.current.scrollTop = scrollContainerRef.current.scrollHeight;
+  };
 
   return (
   <>
@@ -70,32 +219,67 @@ const PersonalDetails = ({step, setStep, formData, setFormData}) => {
       <h2><b>Personal Details</b></h2>
       <p>Please TICK and provide necessary information</p>
     <hr />
-      <MDBRow className='mb-4'>
-        <MDBCol>
-          <MDBInput id='firstName' label='First name' />
-        </MDBCol>
-        <MDBCol>
-          <MDBInput id='middleName' label='Middle name' />
-        </MDBCol>
-        <MDBCol>
-          <MDBInput id='lastName' label='Last name' />
-        </MDBCol>
-      </MDBRow>
+    <MDBRow className='mb-4'>
+            <MDBCol>
+              <MDBInput
+                name='firstName'
+                label='First name'
+                onChange={handleInputChange}
+              />
+            </MDBCol>
+            <MDBCol>
+              <MDBInput
+                name='middleName'
+                label='Middle name'
+                onChange={handleInputChange}
+              />
+            </MDBCol>
+            <MDBCol>
+              <MDBInput
+                name='lastName'
+                label='Last name'
+                onChange={handleInputChange}
+              />
+            </MDBCol>
+          </MDBRow>
 
       <MDBRow className='mb-4'>
         <MDBCol>
           <p>Gender</p>
           <form>
-          <MDBRadio name="genderRadio" id="genderMale" label="Male" inline defaultChecked/>
-          <MDBRadio name="genderRadio" id="genderFemale" label="Female" inline defaultChecked/>
+          <MDBRadio
+      name="genderRadio"
+      id="genderRadioMale"
+      label="Male"
+      value = "Male"
+      inline
+      onChange={handleInputChange}
+    />
+    <MDBRadio
+      name="genderRadio"
+      id="genderRadioFemale"
+      label="Female"
+      value = "Female"
+      inline
+      onChange={handleInputChange}
+    />
           </form>        
           </MDBCol>
         <MDBCol>
         <p>Date Of Birth</p>
-        <MDBInput id='dob' type = "date"  />
+        <MDBInput
+      name='dob'
+      type='date'
+      label='Date of Birth'
+      onChange={handleInputChange}
+    />
         </MDBCol>
         <MDBCol>
-          <MDBInput id='age' label='Age' />
+        <MDBInput
+      name='age'
+      label='Age'
+      onChange={handleInputChange}
+    />
         </MDBCol>
         </MDBRow>
 
@@ -103,15 +287,44 @@ const PersonalDetails = ({step, setStep, formData, setFormData}) => {
       
       </MDBRow>
      
-      <MDBInput wrapperClass='mb-4' id='nric' label='NRIC' />
+      <MDBInput
+  name='nric'
+  label='NRIC/FIN No.'
+  onChange={handleInputChange}
+/>
       <MDBRow>
         <MDBCol>
-        <MDBInput wrapperClass='mb-4' id='pob' label='Place Of Birth' />
+        <MDBInput
+  name='pob'
+  label='Place of Birth'
+  onChange={handleInputChange}
+/>
         </MDBCol>
         <MDBCol>
         <p>Nationality</p>
-          <MDBRadio name="NationailityRadio" id="nationMalaysian" label="Malaysian" inline defaultChecked/>
-          <MDBRadio name="NationailityRadio" id="nationOther" label="Other" inline defaultChecked/>
+        <MDBRadio
+  name="nationalityRadio"
+ 
+  label="Malaysian"
+  value='Malaysian'
+  inline
+  onChange={handleInputChange}
+/>
+<MDBRadio
+  name="nationalityRadio"
+  id="nationalityRadioPR"
+  label="PR"
+  value = "PR"
+  inline
+  onChange={handleInputChange}
+/>
+<MDBRadio
+  name="nationalityRadio"
+  id="nationalityRadioForeigner"
+  label="Foreigner"
+  inline
+  onChange={handleInputChange}
+/>
         </MDBCol>
 
       </MDBRow>
@@ -119,20 +332,82 @@ const PersonalDetails = ({step, setStep, formData, setFormData}) => {
       <MDBRow className='mb-4'>
         <MDBCol>
           <p>Religion</p>
-          <MDBRadio name="ReligionRadio" id="relIslam" label="Islam" inline defaultChecked/>
-          <MDBRadio name="ReligionRadio" id="relBuddha" label="Buddha" inline defaultChecked/>
-          <MDBRadio name="ReligionRadio" id="relHindu" label="Hindu" inline defaultChecked/>
-          <MDBRadio name="ReligionRadio" id="relKristian" label="Kristian" inline defaultChecked/>
-          <MDBRadio name="ReligionRadio" id="relSikh" label="Sikh" inline defaultChecked/>
-          <MDBRadio name="ReligionRadio" id="relOther" label="Other" inline defaultChecked/>
+          <MDBRadio
+  name="religionRadio"
+  id="religionRadioBuddhist"
+  label="Buddhist"
+  value= "Buddhist"
+  inline
+  onChange={handleInputChange}
+/>
+<MDBRadio
+  name="religionRadio"
+  id="religionRadioChristian"
+  label="Christian"
+  value= "Christian"
+  inline
+  onChange={handleInputChange}
+/>
+<MDBRadio
+  name="religionRadio"
+  id="religionRadioHindu"
+  value = "Hindu"
+  label="Hindu"
+  inline
+  onChange={handleInputChange}
+/>
+<MDBRadio
+  name="religionRadio"
+  id="religionRadioMuslim"
+  value = "Muslim"
+  label="Muslim"
+  inline
+  onChange={handleInputChange}
+/>
+<MDBRadio
+  name="religionRadio"
+  id="religionRadioOthers"
+  value = "Others"
+  label="Others"
+  inline
+  onChange={handleInputChange}
+/>
         </MDBCol>
         <MDBCol>
         <p>Race</p>
-          <MDBRadio name="RaceRadio" id="raceMalay" label="Malay" inline defaultChecked/>
-          <MDBRadio name="RaceRadio" id="raceChinese" label="Chinese" inline defaultChecked/>
-          <MDBRadio name="RaceRadio" id="raceIndian" label="Indian" inline defaultChecked/>
-          <MDBRadio name="RaceRadio" id="raceOA" label="Orang Asli" inline defaultChecked/>
-          <MDBRadio name="RaceRadio" id="raceOther" label="Other" inline defaultChecked/>
+        <MDBRadio
+  name="raceRadio"
+  id="raceRadioChinese"
+  value = "Chinese"
+  label="Chinese"
+  inline
+  onChange={handleInputChange}
+
+/>
+<MDBRadio
+  name="raceRadio"
+  id="raceRadioIndian"
+  label="Indian"
+  value = "India"
+  inline
+  onChange={handleInputChange}
+/>
+<MDBRadio
+  name="raceRadio"
+  id="raceRadioMalay"
+  value = "Malay"
+  label="Malay"
+  inline
+  onChange={handleInputChange}
+/>
+<MDBRadio
+  name="raceRadio"
+  value = "Others"
+  id="raceRadioOthers"
+  label="Others"
+  inline
+  onChange={handleInputChange}
+/>
         </MDBCol>
         </MDBRow>
         
@@ -156,41 +431,41 @@ const PersonalDetails = ({step, setStep, formData, setFormData}) => {
       <MDBTableBody>
         <tr>
           <th scope='row'>University/ College/ Technical</th>
-          <td><MDBInput id='EstName1'/>
+          <td><MDBInput name='estName1' onChange={handleInputChange}/>
           </td>
-          <td><MDBInput id='From1'/>
+          <td><MDBInput name='from1' onChange={handleInputChange}/>
           </td>
-          <td><MDBInput id='To1'/>
+          <td><MDBInput name='to1' onChange={handleInputChange}/>
           </td>
-          <td><MDBInput id='FOS1'/>
+          <td><MDBInput name='fos1' onChange={handleInputChange}/>
           </td>
-          <td><MDBInput id='Qual1'/>
+          <td><MDBInput name='qual1' onChange={handleInputChange}/>
           </td>
         </tr>
         <tr>
           <th scope='row'>University/ College/ Technical</th>
-          <td><MDBInput id='EstName2'/>
+          <td><MDBInput name='estName2' onChange={handleInputChange}/>
           </td>
-          <td><MDBInput id='From2'/>
+          <td><MDBInput name='from2'onChange={handleInputChange}/>
           </td>
-          <td><MDBInput id='To2'/>
+          <td><MDBInput name='to2'onChange={handleInputChange}/>
           </td>
-          <td><MDBInput id='FOS2'/>
+          <td><MDBInput name='fos2'onChange={handleInputChange}/>
           </td>
-          <td><MDBInput id='Qual2'/>
+          <td><MDBInput name='qual2'onChange={handleInputChange}/>
           </td>
         </tr>
         <tr>
           <th scope='row'>Secondary</th>
-          <td><MDBInput id='EstName3'/>
+          <td><MDBInput name ='estName3'onChange={handleInputChange}/>
           </td>
-          <td><MDBInput id='From3'/>
+          <td><MDBInput name ='from3'onChange={handleInputChange}/>
           </td>
-          <td><MDBInput id='To3'/>
+          <td><MDBInput name='to3'onChange={handleInputChange}/>
           </td>
-          <td><MDBInput id='FOS3'/>
+          <td><MDBInput name='fos3'onChange={handleInputChange}/>
           </td>
-          <td><MDBInput id='Qual3'/>
+          <td><MDBInput name='qual3'onChange={handleInputChange}/>
           </td>
         </tr>
       </MDBTableBody>
@@ -202,8 +477,8 @@ const PersonalDetails = ({step, setStep, formData, setFormData}) => {
 
         <MDBRow>
         <MDBCol>
-        <MDBInput wrapperClass='mb-4' id='languageSpoken' label='Language(s) Spoken ' />
-        <MDBInput wrapperClass='mb-4' id='languageWritten' label='Language(s) Written ' />
+        <MDBInput wrapperClass='mb-4' name='languageSpoken' label='Language(s) Spoken 'onChange={handleInputChange}/>
+        <MDBInput wrapperClass='mb-4' name='languageWritten' label='Language(s) Written ' onChange={handleInputChange}/>
         </MDBCol>
         </MDBRow>
 
@@ -212,7 +487,7 @@ const PersonalDetails = ({step, setStep, formData, setFormData}) => {
         <hr />
         <MDBRow>
         <MDBCol>
-        <MDBTextArea label='Please provide information on your experiences above.' placeholder='Type here...' id='textAreaWorkingSkill' rows={5} />        
+        <MDBTextArea label='Please provide information on your experiences above.' placeholder='Type here...' name='textAreaWorkingSkill' rows={5} onChange={handleInputChange}/>        
         </MDBCol>
         </MDBRow>
 
@@ -221,19 +496,19 @@ const PersonalDetails = ({step, setStep, formData, setFormData}) => {
         <hr />
         <MDBRow>
         <MDBCol>
-            <p>Current Employer</p>
-            <MDBInput wrapperClass='mb-4' id='currentEmployer' label='Name of current employer or NONE if not employed ' />
+     
+            <MDBInput wrapperClass='mb-4' name='currentEmployer' label='Name of current employer or NONE if not employed '  onChange={handleInputChange} />
         </MDBCol>
         </MDBRow>
         <MDBRow>
         <MDBCol>
-          <MDBInput id='dateofjoining' type = "date" label='Date of joining' />
+          <MDBInput name='dateofjoining' type = "date" label='Date of joining'onChange={handleInputChange} />
         </MDBCol>
         <MDBCol>
-          <MDBInput id='position' label='Position' />
+          <MDBInput name='position' label='Position'onChange={handleInputChange} />
         </MDBCol>
         <MDBCol>
-          <MDBInput id='salary' label='Salary' />
+          <MDBInput name='salary' label='Salary'onChange={handleInputChange} />
         </MDBCol>
         </MDBRow>
         
@@ -255,41 +530,41 @@ const PersonalDetails = ({step, setStep, formData, setFormData}) => {
       <MDBTableBody>
         <tr>
           <th scope='row'>1</th>
-          <td><MDBInput id='nameOfEmployer1'/>
+          <td><MDBInput name='nameOfEmployer1'onChange={handleInputChange}/>
           </td>
-          <td><MDBInput id='positionHeld1'/>
+          <td><MDBInput name='positionHeld1'onChange={handleInputChange}/>
           </td>
-          <td><MDBInput id='em_from1'/>
+          <td><MDBInput name='em_from1'onChange={handleInputChange}/>
           </td>
-          <td><MDBInput id='em_to1'/>
+          <td><MDBInput name='em_to1'onChange={handleInputChange}/>
           </td>
-          <td><MDBInput id='reasonOfLeaving1'/>
+          <td><MDBInput name='reasonOfLeaving1'onChange={handleInputChange}/>
           </td>
         </tr>
         <tr>
           <th scope='row'>2</th>
-          <td><MDBInput id='nameOfEmployer2'/>
+          <td><MDBInput name='nameOfEmployer2'onChange={handleInputChange}/>
           </td>
-          <td><MDBInput id='positionHeld2'/>
+          <td><MDBInput name='positionHeld2'onChange={handleInputChange}/>
           </td>
-          <td><MDBInput id='em_from2'/>
+          <td><MDBInput name='em_from2'onChange={handleInputChange}/>
           </td>
-          <td><MDBInput id='em_to2'/>
+          <td><MDBInput name='em_to2'onChange={handleInputChange}/>
           </td>
-          <td><MDBInput id='reasonOfLeaving2'/>
+          <td><MDBInput name='reasonOfLeaving2'onChange={handleInputChange}/>
           </td>
         </tr>
         <tr>
           <th scope='row'>3</th>
-          <td><MDBInput id='nameOfEmployer3'/>
+          <td><MDBInput name='nameOfEmployer3'onChange={handleInputChange}/>
           </td>
-          <td><MDBInput id='positionHeld3'/>
+          <td><MDBInput name='positionHeld3'onChange={handleInputChange}/>
           </td>
-          <td><MDBInput id='em_from3'/>
+          <td><MDBInput name='em_from3'onChange={handleInputChange}/>
           </td>
-          <td><MDBInput id='em_to3'/>
+          <td><MDBInput name='em_to3'onChange={handleInputChange}/>
           </td>
-          <td><MDBInput id='reasonOfLeaving3'/>
+          <td><MDBInput name='reasonOfLeaving3'onChange={handleInputChange}/>
           </td>
         </tr>
       </MDBTableBody>
@@ -303,11 +578,11 @@ const PersonalDetails = ({step, setStep, formData, setFormData}) => {
     <MDBRow className='mb-4'>
         <MDBCol>
           <p>Health</p>
-          <MDBRadio name="flexRadioDefault" id="flexRadioGood" label="Good" inline defaultChecked/>
-          <MDBRadio name="flexRadioDefault" id="flexRadioBad" label="Bad" inline defaultChecked/>
+          <MDBRadio name="healthRadio" id="healthRadioGood" label="Good"  value="Good" inline onChange={handleInputChange}/>
+          <MDBRadio name="healthRadio" id="healthRadioBad" label="Bad" value="Bad" inline onChange={handleInputChange}/>
           </MDBCol>
           <MDBCol>
-          <MDBInput id='diseases' label='If chosen Bad, what are the diseases?' />
+          <MDBInput name='diseases' label='If chosen Bad, what are the diseases?'onChange={handleInputChange}/>
           </MDBCol>
           </MDBRow>
 
@@ -327,29 +602,29 @@ const PersonalDetails = ({step, setStep, formData, setFormData}) => {
       <MDBTableBody>
         <tr>
           <th scope='row'>1</th>
-          <td><MDBInput id='rel_name1'/>
+          <td><MDBInput  name='rel_name1'onChange={handleInputChange}/>
           </td>
-          <td><MDBInput id='rel_branch1'/>
+          <td><MDBInput name='rel_branch1'onChange={handleInputChange}/>
           </td>
-          <td><MDBInput id='rel_gender1'/>
+          <td><MDBInput  name='rel_gender1'onChange={handleInputChange}/>
           </td>
         </tr>
         <tr>
           <th scope='row'>2</th>
-          <td><MDBInput id='rel_name2'/>
+          <td><MDBInput  name='rel_name2'onChange={handleInputChange}/>
           </td>
-          <td><MDBInput id='rel_branch2'/>
+          <td><MDBInput  name='rel_branch2'onChange={handleInputChange}/>
           </td>
-          <td><MDBInput id='rel_gender2'/>
+          <td><MDBInput  name='rel_gender2'onChange={handleInputChange}/>
           </td>
         </tr>
         <tr>
           <th scope='row'>3</th>
-          <td><MDBInput id='rel_name3'/>
+          <td><MDBInput  name='rel_name3'onChange={handleInputChange}/>
           </td>
-          <td><MDBInput id='rel_branch3'/>
+          <td><MDBInput  name='rel_branch3'onChange={handleInputChange}/>
           </td>
-          <td><MDBInput id='rel_gender3'/>
+          <td><MDBInput name='rel_gender3'onChange={handleInputChange}/>
           </td>
         </tr>
       </MDBTableBody>
@@ -358,10 +633,10 @@ const PersonalDetails = ({step, setStep, formData, setFormData}) => {
 <br></br><br></br>
     <MDBRow>
     <MDBCol>
-        <MDBInput id='expectedSalary' label='Expected Salary' />
+        <MDBInput name='expectedSalary' label='Expected Salary'onChange={handleInputChange} />
     </MDBCol>
     <MDBCol>
-        <MDBInput id='startWorkDate' type = 'date' label='If offered this job, when can you start work?' />
+        <MDBInput name='startWorkDate' type = 'date' label='If offered this job, when can you start work?'onChange={handleInputChange} />
     </MDBCol>
     </MDBRow>
     <br></br><br></br>

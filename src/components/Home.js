@@ -16,24 +16,33 @@ import {
   MDBInput
 } from 'mdb-react-ui-kit';
 
-const Home = (props) => {
-  const [statusId, setStatusId] = useState('');
-  const [info, setInfo] = useState([]);
+import { createClient } from '@supabase/supabase-js';
 
-  const handleTrackSubmit = (e) => {
+const Home = (props) => {
+  const [trackingNumber, settrackingNumber] = useState('');
+  const [status, setStatus] = useState('');
+  
+
+  const handleFormSubmit = (e) => {
     e.preventDefault();
 
     const formData = {
-      statusId: statusId,
-      info: info,
+      trackingNumber:trackingNumber,
+      status: status,
     };
 
     props.onSaveFormData(formData);
     props.onNext();
   };
+  const handleTrackSubmit = (e) => {
+    e.preventDefault();
+  
+    props.onTrackSubmit(trackingNumber);
 
+
+  };
   return (
-    <form onSubmit={handleTrackSubmit}>
+   
       <>
         <MDBNavbar light bgColor='#F1FFEB' sticky>
           <MDBContainer fluid>
@@ -51,25 +60,23 @@ const Home = (props) => {
                 name="track"
                 id="track"
                 placeholder='Track ID'
-                value={statusId}
-                onChange={(e) => setStatusId(e.target.value)}
+                value={trackingNumber}
+                onChange={(e) => settrackingNumber(e.target.value)}
               />
-              <button class="btn btn-sm" style={{ color: 'black' }}>
+              <button className="btn btn-sm" style={{ color: 'black' }}onClick={handleTrackSubmit}>
                 <MDBIcon icon='search'></MDBIcon>
               </button>
             </MDBInputGroup>
           </MDBContainer>
         </MDBNavbar>
 
-        <body>
-          <div className='p-5 text-center'>
-            <h1 className='mb-3'>Hi Welcome!</h1>
-            <h4 className='mb-3'>Please click the button below to submit for an interview!</h4>
-            <button class = "button button1" type="submit">
-              APPLY NOW!
-            </button>
-          </div>
-        </body>
+        <div className='p-5 text-center'>
+          <h1 className='mb-3'>Hi Welcome!</h1>
+          <h4 className='mb-3'>Please click the button below to submit for an interview!</h4>
+          <button className="button button1" type="submit" onClick={handleFormSubmit}>
+            APPLY NOW!
+          </button>
+        </div>
 
         <MDBFooter className='text-center text-lg-start text-muted' style={{ backgroundColor: "#F1FFEB" }}>
           <section className='d-flex justify-content-center justify-content-lg-between p-4 border-bottom'>
@@ -147,7 +154,7 @@ const Home = (props) => {
           </div>
         </MDBFooter>
       </>
-    </form>
+ 
   );
 };
 

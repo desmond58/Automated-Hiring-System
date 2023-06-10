@@ -11,7 +11,7 @@ import {
 import logo from '../images/huachanglogo.png';
 
 
-const MarketingConsultant = (props) => {
+const MarketingConsultant = ({ combinedFormData, onSaveFormData, onNext, onBack }) => {
   const [languageList, setLanguageList] = useState([]);
 
   const [input1, setInput1] = useState("");
@@ -38,16 +38,23 @@ const MarketingConsultant = (props) => {
       input7: input7,
       input8: input8,
     };
-    props.onSaveFormData(formData);
-    props.onNext();
+   
+    // Combine the specific form data with the combinedFormData if needed
+    const updatedFormData = {
+      ...combinedFormData,
+      ...formData,
+    };
+  // Use the combinedFormData as needed in the Marketing component
+  
+    onSaveFormData(updatedFormData);
+  console.log(combinedFormData);
+  console.log(updatedFormData);
+    onNext();
   };
-
- 
 
   const backHandler = () => {
-    props.onBack();
+    onBack();
   };
-
 
   return (
     <form onSubmit={submitHandler}>

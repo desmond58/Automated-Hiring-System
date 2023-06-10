@@ -12,7 +12,7 @@ import {
 import logo from '../images/huachanglogo.png';
 
 
-const BusinessAdministrative = (props) => {
+const BusinessAdministrative= ({ combinedFormData, onSaveFormData, onNext, onBack }) => {
   const [languageList, setLanguageList] = useState([]);
 
   const [input1, setInput1] = useState("");
@@ -22,7 +22,7 @@ const BusinessAdministrative = (props) => {
   const [input5, setInput5] = useState("");
   const [input6, setInput6] = useState("");
   const [input7, setInput7] = useState("");
-  const [input8, setInput8] = useState("");
+ 
   const LanguageList = ["English", "Mandarin", "Bahasa Malaysia"];
   
   const submitHandler = (event) => {
@@ -37,16 +37,25 @@ const BusinessAdministrative = (props) => {
       input5: input5,
       input6: input6,
       input7: input7,
-      input8: input8,
+   
     };
-    props.onSaveFormData(formData);
-    props.onNext();
+     // Combine the specific form data with the combinedFormData if needed
+     const updatedFormData = {
+      ...combinedFormData,
+      ...formData,
+    };
+  // Use the combinedFormData as needed in the Marketing component
+  
+    onSaveFormData(updatedFormData);
+  console.log(combinedFormData);
+  console.log(updatedFormData);
+    onNext();
   };
-
  
 
+ 
   const backHandler = () => {
-    props.onBack();
+    onBack();
   };
 
 

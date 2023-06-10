@@ -12,15 +12,14 @@ import {
 } from 'mdb-react-ui-kit';
 import logo from '../images/huachanglogo.png';
 import '../button.css';
-
-const PositionForm = (props) => {
+const PositionForm = ({ personalDetails, onSubmit, onNext, onBack, onPositionChange }) => {
   const [position, setPosition] = useState("");
   const [pathList, setPathList] = useState([]);
-  const [input1, setInput1] = useState("");
-  const [input2, setInput2] = useState("");
-  const [input3, setInput3] = useState("");
-  const [input4, setInput4] = useState("");
-  const [input5, setInput5] = useState("");
+  const [inputp1, setInputp1] = useState("");
+  const [inputp2, setInputp2] = useState("");
+  const [inputp3, setInputp3] = useState("");
+  const [inputp4, setInputp4] = useState("");
+  const [inputp5, setInputp5] = useState("");
   const PathList = ["Social Media", "Friends", "School", "Others"];
 
   const submitHandler = (event) => {
@@ -28,24 +27,32 @@ const PositionForm = (props) => {
     const formData = {
       position: position,
       pathList: pathList,
-      input1: input1,
-      input2: input2,
-      input3: input3,
-      input4: input4,
-      input5: input5,
+      inputp1: inputp1,
+      inputp2: inputp2,
+      inputp3: inputp3,
+      inputp4: inputp4,
+      inputp5: inputp5,
     };
-    props.onSaveFormData(formData);
-    props.onNext();
+    const combinedFormData = {
+      ...personalDetails,
+      ...formData,
+    };
+    onSubmit(combinedFormData, position); // Pass the combinedFormData and the selected position as arguments
+    console.log(combinedFormData);
+    onNext(); // Move to the next step
+   
   };
 
   const backHandler = () => {
-    props.onBack();
+    onBack(); // Use onBack instead of props.onBack
+
+    
   };
 
   const handlePositionChange = (event) => {
     const selectedPosition = event.target.value;
     setPosition(selectedPosition);
-    props.onPositionChange(selectedPosition); // call onPositionChange with the selected position
+    onPositionChange(selectedPosition); // Use onPositionChange instead of props.onPositionChange
   };
 
   return (
@@ -88,7 +95,7 @@ const PositionForm = (props) => {
               <option value="Business Administrative">Business Administrative (Internship)</option>
               <option value="HumanResources">Human Resource (Internship)</option>
               <option value="Accounting">Accounting (Internship)</option>
-              <option value="Marketing Coordinator">Marketing Coordinator</option>
+              <option value="Marketing Consultant">Marketing Consultant</option>
               <option value="Admin Executive">Admin Executive</option>
             </select>
           </div>
@@ -130,8 +137,8 @@ const PositionForm = (props) => {
             rows={5}
             type="text"
             id="input1"
-            value={input1}
-            onChange={(event) => setInput1(event.target.value)}
+            value={inputp1}
+            onChange={(event) => setInputp1(event.target.value)}
             required
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
@@ -144,8 +151,8 @@ const PositionForm = (props) => {
             rows={5}
             type="text"
             id="input2"
-            value={input2}
-            onChange={(event) => setInput2(event.target.value)}
+            value={inputp2}
+            onChange={(event) => setInputp2(event.target.value)}
             required
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
@@ -158,8 +165,8 @@ const PositionForm = (props) => {
             rows={5}
             type="text"
             id="input3"
-            value={input3}
-            onChange={(event) => setInput3(event.target.value)}
+            value={inputp3}
+            onChange={(event) => setInputp3(event.target.value)}
             required
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
@@ -173,8 +180,8 @@ const PositionForm = (props) => {
               rows={5}
               type="text"
               id="input4"
-              value={input4}
-              onChange={(event) => setInput4(event.target.value)}
+              value={inputp4}
+              onChange={(event) => setInputp4(event.target.value)}
               required
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
@@ -189,8 +196,8 @@ const PositionForm = (props) => {
               rows={5}
               type="text"
               id="input5"
-              value={input5}
-              onChange={(event) => setInput5(event.target.value)}
+              value={inputp5}
+              onChange={(event) => setInputp5(event.target.value)}
               required
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
