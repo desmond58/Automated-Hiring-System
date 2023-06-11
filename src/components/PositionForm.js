@@ -40,13 +40,13 @@ const PositionForm = ({ personalDetails, onSubmit, onNext, onBack, onPositionCha
     onSubmit(combinedFormData, position); // Pass the combinedFormData and the selected position as arguments
     console.log(combinedFormData);
     onNext(); // Move to the next step
-   
+
   };
 
   const backHandler = () => {
     onBack(); // Use onBack instead of props.onBack
 
-    
+
   };
 
   const handlePositionChange = (event) => {
@@ -56,7 +56,7 @@ const PositionForm = ({ personalDetails, onSubmit, onNext, onBack, onPositionCha
   };
 
   return (
-    
+
     <form onSubmit={submitHandler}>
       <>
         <MDBNavbar sticky bgColor='#F1FFEB'>
@@ -71,7 +71,7 @@ const PositionForm = ({ personalDetails, onSubmit, onNext, onBack, onPositionCha
             </MDBNavbarBrand>
           </MDBContainer>
         </MDBNavbar>
-        
+
 
         <div style={{ margin: '200px', marginTop: "50px" }}>
           <h2><b>Job Interest</b></h2>
@@ -112,20 +112,20 @@ const PositionForm = ({ personalDetails, onSubmit, onNext, onBack, onPositionCha
           <br></br>
 
           {PathList.map((path) => (
-             <div key={path} className="mb-2">
-            <label
-              key={path}
-              className="block font-bold mb-2"
-            >
-              <input
-                type="checkbox"
-                id="path"
-                value={path}
-                onChange={(event) => setPathList(event.target.checked ? [...pathList, event.target.value] : pathList.filter((c) => c !== event.target.value))}
-                className="mr-2 leading-tight"
-              />
-              {path}
-            </label>
+            <div key={path} className="mb-2">
+              <label
+                key={path}
+                className="block font-bold mb-2"
+              >
+                <input
+                  type="checkbox"
+                  id="path"
+                  value={path}
+                  onChange={(event) => setPathList(event.target.checked ? [...pathList, event.target.value] : pathList.filter((c) => c !== event.target.value))}
+                  className="mr-2 leading-tight"
+                />
+                {path}
+              </label>
             </div>
           ))}
 
@@ -217,13 +217,13 @@ const PositionForm = ({ personalDetails, onSubmit, onNext, onBack, onPositionCha
           </div>
 
         </div>
-        
+
         <div className='text-center p-4' style={{ backgroundColor: '#F1FFEB' }}>
-            HUACHANG GROWMAX M SDN BHD
-          </div>
+          HUACHANG GROWMAX M SDN BHD
+        </div>
       </>
     </form>
-    
+
   );
 };
 
