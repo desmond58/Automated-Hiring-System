@@ -10,7 +10,7 @@ const BigFiveCalculator = ({ onBack,id }) => {
   const [suggestedFields, setSuggestedFields] = useState([]);
   const [highestPath, setHighestPath] = useState('');
   const [scores, setScores] = useState({ E: 0, A: 0, C: 0, N: 0, O: 0 });
-   
+  const [trackingNumber, setTrackingNumber] = useState('');
 
   useEffect(() => {
     const fetchQuestions = async () => {
@@ -24,6 +24,7 @@ const BigFiveCalculator = ({ onBack,id }) => {
         console.error('Error fetching questions:', error.message);
       } else {
         setFormData(data);
+        setTrackingNumber(data.trackingNumber); // Set the tracking number from the retrieved data
       }
     };
 
@@ -100,6 +101,7 @@ const BigFiveCalculator = ({ onBack,id }) => {
 
   return (
     <div>
+<h2>Tracking Number: {trackingNumber}</h2>
       <h2>Suggested Career Fields:</h2>
       <p>Highest Value Path: <b>{highestPath}</b> </p>
       <p>Scores:</p>

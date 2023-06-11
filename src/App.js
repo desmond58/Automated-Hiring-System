@@ -28,38 +28,49 @@ const App = () => {
   const supabaseUrl = 'https://aehwgrirrnhmatqmqcsa.supabase.co';
   const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFlaHdncmlycm5obWF0cW1xY3NhIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTY4MDg2NTg4MywiZXhwIjoxOTk2NDQxODgzfQ.DeXxoWY65kzpbvdxME16mAHj2KGMwDRg_jEGgUIxKc0';
   const supabase = createClient(supabaseUrl, supabaseKey);
-  
   const handleTrackSubmit = async (trackingNumber) => {
     try {
-      // Perform the Supabase API request to fetch the status based on the tracking number
-      const { data, error } = await supabase
+      // Perform the Supabase API request to fetch the status from the 'confirmation' table
+      const { data: confirmationData, error: confirmationError } = await supabase
         .from('confirmation')
         .select('status')
         .eq('trackingNumber', trackingNumber)
         .limit(1);
-
-      if (error) {
-        console.error('Error retrieving status:', error);
+  
+      // Perform the Supabase API request to fetch the status from the 'bigfive' table
+      const { data: bigfiveData, error: bigfiveError } = await supabase
+        .from('bigfive')
+        .select('status')
+        .eq('trackingNumber', trackingNumber)
+        .limit(1);
+  
+      if (confirmationError) {
+        console.error('Error retrieving status from confirmation table:', confirmationError);
         return;
       }
-
-      if (data.length === 0) {
+  
+      if (bigfiveError) {
+        console.error('Error retrieving status from bigfive table:', bigfiveError);
+        return;
+      }
+  
+      if (confirmationData.length === 0 && bigfiveData.length === 0) {
         console.log('No matching tracking number found');
         return;
       }
-
-      const retrievedStatus = data[0].status;
-     
+  
+      const retrievedStatus = confirmationData.length > 0 ? confirmationData[0].status : bigfiveData[0].status;
+  
       console.log('Retrieved status:', retrievedStatus);
-
+  
       // Update the status in the state or handle the response as needed
       setStatus(retrievedStatus);
-      handleStepChange(8, trackingNumber); // Use handleStepChange instead of setStep
+      handleStepChange(8, trackingNumber);
     } catch (error) {
       console.error('Error retrieving status:', error);
     }
   };
-
+  
   const handleStepChange = (newStep, trackingNumber) => {
     setStep(newStep);
     setTrackingId(trackingNumber); // Set the trackingNumber in the state
@@ -133,8 +144,8 @@ const App = () => {
           onGenerateId={handleGenerateId}
           onNext={handleBigFiveCalculator}
           onBack={handleBack}
-          formData={formData}
-     
+          personalDetails={formData}
+    
         />
       )}
 

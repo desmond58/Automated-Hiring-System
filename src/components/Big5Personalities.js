@@ -3,6 +3,7 @@ import '../index.css';
 import logo from "../images/huachanglogo.png";
 import BigFiveCalculator from './BigFiveCalculator';
 import { createClient } from '@supabase/supabase-js';
+
 import {
   MDBBtn,
   MDBContainer,
@@ -12,11 +13,13 @@ import {
   MDBNavbar,
   MDBNavbarBrand
 } from "mdb-react-ui-kit";
-const supabaseUrl = 'https://aehwgrirrnhmatqmqcsa.supabase.co';
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFlaHdncmlycm5obWF0cW1xY3NhIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTY4MDg2NTg4MywiZXhwIjoxOTk2NDQxODgzfQ.DeXxoWY65kzpbvdxME16mAHj2KGMwDRg_jEGgUIxKc0';
-const supabase = createClient(supabaseUrl, supabaseKey);
 
-const Big5Personalities = ({ supabase, onGenerateId, onNext, onBack  }) => {
+
+// const supabaseUrl = 'https://aehwgrirrnhmatqmqcsa.supabase.co';
+// const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFlaHdncmlycm5obWF0cW1xY3NhIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTY4MDg2NTg4MywiZXhwIjoxOTk2NDQxODgzfQ.DeXxoWY65kzpbvdxME16mAHj2KGMwDRg_jEGgUIxKc0';
+// const supabase = createClient(supabaseUrl, supabaseKey);
+
+const Big5Personalities = ({  personalDetails,supabase, onGenerateId, onNext, onBack  }) => {
   const [formData, setFormData] = useState({
     question1: '',
     question2: '',
@@ -68,65 +71,91 @@ const Big5Personalities = ({ supabase, onGenerateId, onNext, onBack  }) => {
     question48: '',
     question49: '',
     question50: '',
-  });
 
-
-  const handleChange = (event) => {
+  });const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData((prevInputValues) => ({
       ...prevInputValues,
       [name]: value,
     }));
+  
     // Move the form submission logic here if you want to submit on every input change
-  };const [submitted, setSubmitted] = useState(false);
+  };
+  
+  const [submitted, setSubmitted] = useState(false);
   const [insertedId, setInsertedId] = useState(null);
+  
   const handleSubmit = async (event) => {
-    event.preventDefault();
-  
-    try {
-      const timestamp = new Date(); // Generate current timestamp
-  
-      const formDataWithTimestamp = {
-        ...formData,
-        timestamp: timestamp.toISOString(), // Convert timestamp to string format
-      };
-  
-      const { data, error } = await supabase.from('bigfive').insert([formDataWithTimestamp]);
-  
-      if (error) {
-        console.error('Error submitting form data:', error.message);
-      } else {
-        console.log('Form data submitted successfully');
-  
-        // Retrieve the inserted data by querying the Supabase table
-        const { data: insertedData, error: insertedError } = await supabase
-          .from('bigfive')
-          .select('id')
-          .eq('timestamp', formDataWithTimestamp.timestamp);
-  
-          if (insertedError) {
-            console.error('Error retrieving inserted data:', insertedError.message);
-          } else {
-            console.log('Inserted Data:', insertedData);
-            if (insertedData.length > 0) {
-              const id = insertedData[0].id;
-              setInsertedId(id);
-              setSubmitted(true);
-              onGenerateId(id); // Pass the generated ID to the handleGenerateId function
-              console.log('Inserted ID:', id);
-              onNext(); // Call the onNext function from props to navigate to the next step
-            }
-          }
-        }
-      } catch (error) {
-        console.error('Error submitting form data:', error.message);
-      }
+  event.preventDefault();
+
+  try {
+    // Fetch the last status data
+    const { data: totalCountData, error: totalCountError } = await supabase
+      .from('bigfive_count')
+      .select('count')
+      .eq('id', 1); // Assuming there is a row with id 1 in the bigfive_count table
+    if (totalCountError) {
+      console.error('Error retrieving total count:', totalCountError.message);
+      return;
+    }
+
+    const totalRecords = totalCountData.length > 0 ? totalCountData[0].count : 0;
+    const newStatusId = totalRecords + 1;
+
+    const timestamp = Date.now(); // Generate current timestamp in milliseconds
+    const trackingNumber = `TR-${timestamp}-${newStatusId}`;
+
+    const formDataWithTimestamp = {
+      ...formData,
+      ...personalDetails,
+      statusId: newStatusId,
+      status: "PROGRESS", // Exclude status from the formData
+      trackingNumber, // Include the new trackingNumber in the formData
+      submissionDate: new Date().toISOString(), // Convert timestamp to string format
     };
-  
+
+    const { data, error } = await supabase.from('bigfive').insert([formDataWithTimestamp]);
+
+    if (error) {
+      console.error('Error submitting form data:', error.message);
+    } else {
+      console.log('Form data submitted successfully');
+      // Retrieve the inserted data by querying the Supabase table
+      const { data: insertedData, error: insertedError } = await supabase
+        .from('bigfive')
+        .select('id')
+        .eq('submissionDate', formDataWithTimestamp.submissionDate);
+console.log( formDataWithTimestamp.submissionDate)
+      if (insertedError) {
+        console.error('Error retrieving inserted data:', insertedError.message);
+      } else {
+        console.log('Inserted Data:', insertedData);
+        if (insertedData.length > 0) {
+          const id = insertedData[0].id;
+          setInsertedId(id);
+          setSubmitted(true);
+          onGenerateId(id); // Pass the generated ID to the handleGenerateId function
+          console.log('Inserted ID:', id);
+          console.log(personalDetails);
+          // Update the count in bigfive_count table
+          await supabase
+            .from('bigfive_count')
+            .update({ count: totalRecords + 1 })
+            .eq('id', 1); // Assuming there is a row with id 1 in the bigfive_count table
+         onNext(); // Call the onNext function from props to navigate to the next step
+        }
+      }
+    }
+  } catch (error) {
+    console.error('Error submitting form data:', error.message);
+  }
+};
+
   
   const backHandler = () => {
     onBack();
   };
+  
 
   
 

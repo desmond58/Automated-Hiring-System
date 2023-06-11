@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Marketing from './Marketing';
 import { createClient } from '@supabase/supabase-js';
 
@@ -6,57 +6,82 @@ const supabaseUrl = 'https://aehwgrirrnhmatqmqcsa.supabase.co';
 const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFlaHdncmlycm5obWF0cW1xY3NhIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTY4MDg2NTg4MywiZXhwIjoxOTk2NDQxODgzfQ.DeXxoWY65kzpbvdxME16mAHj2KGMwDRg_jEGgUIxKc0';
 const supabase = createClient(supabaseUrl, supabaseKey);
 
-const Confirmation = ({  combinedFormData,selectedPosition, onSubmit, onNext,onBack }) => {
-  // Check if personalDetails object is defined
-  if (! combinedFormData) {
-    return <p>Loading...</p>; // Display a loading state if data is not available yet
-  }
-  const handleSubmit = async () => {
+const Confirmation = ({ combinedFormData, selectedPosition, onSubmit, onNext, onBack }) => {
+  const [totalCount, setTotalCount] = useState(0);
+
+  useEffect(() => {
+    fetchTotalCount();
+  }, []);
+
+  const fetchTotalCount = async () => {
     try {
-      // Generate the status ID by incrementing the last status ID in the table by 1
-      const { data: lastStatusData, error: lastStatusError } = await supabase
-        .from('confirmation')
-        .select('statusId', { order: { column: 'statusId', ascending: false }, limit: 1 });
-        
-      if (lastStatusError) {
-        console.error('Error retrieving last status ID:', lastStatusError);
+      const { data, error } = await supabase
+        .from('confirmation_count')
+        .select('count')
+        .eq('id', 1);
+
+      if (error) {
+        console.error('Error retrieving total count:', error.message);
         return;
       }
-      
-      const lastStatusId = lastStatusData.length > 0 ? lastStatusData[0].statusId : 0;
-      const newStatusId = lastStatusId + 1;
-  
+
+      if (data.length > 0) {
+        setTotalCount(data[0].count);
+      }
+    } catch (error) {
+      console.error('Error retrieving total count:', error.message);
+    }
+  };
+
+  const updateTotalCount = async (newCount) => {
+    try {
+      await supabase
+        .from('confirmation_count')
+        .update({ count: newCount })
+        .eq('id', 1);
+    } catch (error) {
+      console.error('Error updating total count:', error.message);
+    }
+  };
+
+  const handleSubmit = async () => {
+    try {
+      const newStatusId = totalCount + 1;
+
       // Generate the tracking number
       const timestamp = Date.now();
       const trackingNumber = `TR-${timestamp}-${newStatusId}`;
-  
+
       // Insert the form data along with the generated status ID, tracking number, and submission date into the Supabase table
-      const { data, error } = await supabase
-        .from('confirmation')
-        .insert([{ 
-          ...combinedFormData, 
-          statusId: newStatusId, 
+      const { data, error } = await supabase.from('confirmation').insert([
+        {
+          ...combinedFormData,
+          statusId: newStatusId,
           trackingNumber,
-          submissionDate: new Date().toISOString() 
-        }]);
-        
+          submissionDate: new Date().toISOString(),
+          status: 'PROGRESS',
+        },
+      ]);
+
       if (error) {
-        console.error('Error inserting data:', error);
+        console.error('Error inserting data:', error.message);
         return;
       }
-  
+
       console.log('Data inserted successfully:', data);
       // Perform any further actions after successful submission
       // ...
- 
+
       onSubmit(); // Call the onSubmit function to notify the parent component
+
+      await updateTotalCount(newStatusId); // Update the count in bigfive_count table
 
       onNext(); // Call the onNext function to navigate to the next page
     } catch (error) {
-      console.error('Error inserting data:', error);
+      console.error('Error inserting data:', error.message);
     }
   };
-  
+
   const handleBack = () => {
     onBack(); // Call the onBack function to navigate back to the previous page
   };
@@ -78,7 +103,7 @@ const Confirmation = ({  combinedFormData,selectedPosition, onSubmit, onNext,onB
       <p>Language Written: { combinedFormData.languageWritten}</p>
       <p>Working Skill Experiences: { combinedFormData.workingSkillExperiences}</p>
       <p>Current Employer: { combinedFormData.currentEmployer}</p>
-      <p>Date of Joining: { combinedFormData.dateOfJoining}</p>
+      <p>Date of Joining: { combinedFormData.dateofjoining}</p>
       <p>Position: { combinedFormData.position}</p>
       <p>Salary: { combinedFormData.salary}</p>
       <p>Health: { combinedFormData.health}</p>

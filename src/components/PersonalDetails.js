@@ -92,16 +92,85 @@ const PersonalDetails = ({ step, setStep, onSaveFormData }) => {
    
 const handleFormSubmit = (formData) => {
   onSaveFormData(formData); // Call the onSaveFormData function with the current form data
-  setStep(4);
+
 };
 
   const backhandler = () => {
     setStep(1);
   };
 
-  const handleNOClick = () => {
-    setStep(3);
+  const handleNOClick = (event) => {
+    event.preventDefault();
+    const newFormData = {
+      firstName: formData.firstName,
+      middleName: formData.middleName,
+      lastName: formData.lastName,
+      gender: formData.genderRadio,
+      dob: formData.dob,
+      age: formData.age,
+      nric: formData.nric,
+      pob: formData.pob,
+      nationality: formData.nationalityRadio,
+      religion: formData.religionRadio,
+      race: formData.raceRadio,
+      estName1: formData.estName1,
+      from1: formData.from1,
+      to1: formData.to1,
+      fos1: formData.fos1,
+      qual1: formData.qual1,
+      estName2: formData.estName2,
+      from2: formData.from2,
+      to2: formData.to2,
+      fos2: formData.fos2,
+      qual2: formData.qual2,
+      estName3: formData.estName3,
+      from3: formData.from3,
+      to3: formData.to3,
+      fos3: formData.fos3,
+      qual3: formData.qual3,
+      languageSpoken: formData.languageSpoken,
+      languageWritten: formData.languageWritten,
+      textAreaWorkingSkill: formData.textAreaWorkingSkill,
+      currentEmployer: formData.currentEmployer,
+      dateofjoining: formData.dateofjoining,
+      position: formData.position,
+      salary: formData.salary,
+      nameOfEmployer1: formData.nameOfEmployer1,
+      positionHeld1: formData.positionHeld1,
+      em_from1: formData.em_from1,
+      em_to1: formData.em_to1,
+      reasonOfLeaving1: formData.reasonOfLeaving1,
+      nameOfEmployer2: formData.nameOfEmployer2,
+      positionHeld2: formData.positionHeld2,
+      em_from2: formData.em_from2,
+      em_to2: formData.em_to2,
+      reasonOfLeaving2: formData.reasonOfLeaving2,
+      nameOfEmployer3: formData.nameOfEmployer3,
+      positionHeld3: formData.positionHeld3,
+      em_from3: formData.em_from3,
+      em_to3: formData.em_to3,
+      reasonOfLeaving3: formData.reasonOfLeaving3,
+      health: formData.healthRadio,
+      diseases: formData.diseases,
+      rel_name1: formData.rel_name1,
+      rel_branch1: formData.rel_branch1,
+      rel_gender1: formData.rel_gender1,
+      rel_name2: formData.rel_name2,
+      rel_branch2: formData.rel_branch2,
+      rel_gender2: formData.rel_gender2,
+      rel_name3: formData.rel_name3,
+      rel_branch3: formData.rel_branch3,
+      rel_gender3: formData.rel_gender3,
+      expectedSalary: formData.expectedSalary,
+      startWorkDate: formData.startWorkDate
+    };
+  
+console.log(newFormData)
+    handleFormSubmit(newFormData,    setStep(3));
+  
   };
+  
+   
 
   const handleYESClick = (event) => {
     event.preventDefault();
@@ -170,8 +239,10 @@ const handleFormSubmit = (formData) => {
     };
   
 console.log(newFormData)
-    handleFormSubmit(newFormData,  setStep);
+    handleFormSubmit(newFormData,   setStep(4));
   };
+
+
   const handleInputChange = (event) => {
     const { name, value, type, checked } = event.target;
 

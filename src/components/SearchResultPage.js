@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { createClient } from '@supabase/supabase-js';
 
-const SearchResultPage = ({ trackingNumber,onBack }) => {
+const SearchResultPage = ({ trackingNumber, onBack }) => {
   const [status, setStatus] = useState('');
   const [firstName, setFirstName] = useState('');
   const [middleName, setMiddleName] = useState('');
   const [lastName, setLastName] = useState('');
-
+  const [remark, setRemark] = useState('');
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -14,56 +14,81 @@ const SearchResultPage = ({ trackingNumber,onBack }) => {
         const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFlaHdncmlycm5obWF0cW1xY3NhIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTY4MDg2NTg4MywiZXhwIjoxOTk2NDQxODgzfQ.DeXxoWY65kzpbvdxME16mAHj2KGMwDRg_jEGgUIxKc0';
         const supabase = createClient(supabaseUrl, supabaseKey);
 
-        // Perform the Supabase API request to fetch the status, middle name, and last name based on the tracking number
-        const { data, error } = await supabase
-          .from('confirmation')
-          .select('status, firstName, middleName, lastName')
-          .eq('trackingNumber', trackingNumber)
-          .limit(1);
+       // Search for the tracking number in both the 'confirmation' and 'bigfive' tables
+       const { data: confirmationData, error: confirmationError } = await supabase
+       .from('confirmation')
+       .select('status, firstName, middleName, lastName, remark')
+       .eq('trackingNumber', trackingNumber)
+       .limit(1);
 
-        if (error) {
-          console.error('Error retrieving data:', error);
-          return;
-        }
+     const { data: bigfiveData, error: bigfiveError } = await supabase
+       .from('bigfive')
+       .select('status, firstName, middleName, lastName, remark')
+       .eq('trackingNumber', trackingNumber)
+       .limit(1);
 
-        if (data.length === 0) {
-          console.log('No matching tracking number found');
-          return;
-        }
+     // Handle errors
+     if (confirmationError) {
+       console.error('Error retrieving data from confirmation table:', confirmationError);
+     }
 
-        const retrievedStatus = data[0].status;
-        const retrievedFirstName = data[0].firstName;
-        const retrievedMiddleName = data[0].middleName;
-        const retrievedLastName = data[0].lastName;
+     if (bigfiveError) {
+       console.error('Error retrieving data from bigfive table:', bigfiveError);
+     }
 
-        // Update the state with the retrieved data
-        setStatus(retrievedStatus);
-        setFirstName(retrievedFirstName);
-        setMiddleName(retrievedMiddleName);
-        setLastName(retrievedLastName);
-      } catch (error) {
-        console.error('Error retrieving data:', error);
-      }
-    };
+     if (confirmationData && confirmationData.length > 0) {
+       const retrievedStatus = confirmationData[0].status;
+       const retrievedFirstName = confirmationData[0].firstName;
+       const retrievedMiddleName = confirmationData[0].middleName;
+       const retrievedLastName = confirmationData[0].lastName;
+       const retrievedRemark = confirmationData[0].remark;
 
-    fetchData();
-  }, [trackingNumber]);
+       setStatus(retrievedStatus);
+       setFirstName(retrievedFirstName);
+       setMiddleName(retrievedMiddleName);
+       setLastName(retrievedLastName);
+       setRemark(retrievedRemark);
+     }
 
+     if (bigfiveData && bigfiveData.length > 0) {
+       const retrievedStatus = bigfiveData[0].status;
+       const retrievedFirstName = bigfiveData[0].firstName;
+       const retrievedMiddleName = bigfiveData[0].middleName;
+       const retrievedLastName = bigfiveData[0].lastName;
+       const retrievedRemark = bigfiveData[0].remark;
 
+       setStatus(retrievedStatus);
+       setFirstName(retrievedFirstName);
+       setMiddleName(retrievedMiddleName);
+       setLastName(retrievedLastName);
+       setRemark(retrievedRemark);
+     }
 
-  return (
-    <div className="container mt-5">
-      <div className="card p-5" style={{ backgroundColor: 'lightgreen' }}>
-        <h2 className="mb-4">Interview Form Status</h2>
-        <p className="mb-4">Hi {firstName} {middleName} {lastName},</p>
-        <p>Your interview form is still under {status}.</p>
-        
-        <button className="btn btn-primary mt-4"button onClick={onBack}>
-            Back
-            </button>
-      </div>
-    </div>
-  );
+     if ((!confirmationData || confirmationData.length === 0) && (!bigfiveData || bigfiveData.length === 0)) {
+       console.log('No matching tracking number found');
+     }
+   } catch (error) {
+     console.error('Error retrieving data:', error);
+   }
+ };
+
+ fetchData();
+}, [trackingNumber]);
+
+return (
+ <div className="container mt-5">
+   <div className="card p-5" style={{ backgroundColor: 'lightgreen' }}>
+     <h2 className="mb-4">Interview Form Status</h2>
+     <p className="mb-4">Hi {firstName} {middleName} {lastName},</p>
+     <p>Your interview form is still under {status}.</p>
+     <p>Remark: {remark}</p>
+
+     <button className="btn btn-primary mt-4" onClick={onBack}>
+       Back
+     </button>
+   </div>
+ </div>
+);
 };
 
 export default SearchResultPage;
