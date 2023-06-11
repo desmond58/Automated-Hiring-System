@@ -13,15 +13,40 @@
   }
   
   .button1 {
-    background-color: #F1FFEB; 
-    color: black; 
-    border: 2px solid #c3e7b4;
+    background-color: teal; 
+    color: white; 
+    border: 2px solid teal;
     border-radius: 12px;
   }
   
   .button1:hover {
     background-color: white;
     color: black;
+  }
+
+  .button1 span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
+  
+  .button1 span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+  }
+  
+  .button1:hover span {
+    padding-right: 25px;
+  }
+  
+  .button1:hover span:after {
+    opacity: 1;
+    right: 0;
   }
 
   .buttonBack {
@@ -44,6 +69,30 @@
   }
   
   .buttonNext:hover {
+    background-color: white;
+    color: black;
+  }
+
+  .trackButton {
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    margin-left: 3px;
+  }
+
+  .track {
+    background-color: teal; 
+    color: white; 
+    border: 1px solid teal;
+    border-radius: 4px;
+  }
+
+  .track:hover {
     background-color: white;
     color: black;
   }
