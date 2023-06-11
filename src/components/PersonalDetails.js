@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, { useRef, useState } from 'react';
 import logo from '../images/huachanglogo.png';
 import {
   MDBContainer,
@@ -9,8 +9,8 @@ import {
   MDBInput,
   MDBBtn,
   MDBRadio,
-  MDBTable, 
-  MDBTableHead, 
+  MDBTable,
+  MDBTableHead,
   MDBTableBody,
   MDBTextArea,
   MDBFooter,
@@ -21,79 +21,83 @@ import {
   MDBModalTitle,
   MDBModalBody,
   MDBModalFooter,
-  MDBTooltip
+  MDBTooltip,
+  MDBCard,
+  MDBCardBody,
+  MDBCardTitle,
+  MDBCardText,
 } from 'mdb-react-ui-kit';
 import { setSelectionRange } from '@testing-library/user-event/dist/utils';
 
 const PersonalDetails = ({ step, setStep, onSaveFormData }) => {
   const [formData, setFormData] = useState({
-      firstName: '',
-      middleName: '',
-      lastName: '',
-      gender: '',
-      dob: '',
-      age: '',
-      nric: '',
-      pob: '',
-      nationality: '',
-      religion: '',
-      race: '',
-      estName1: '',
-      from1: '',
-      to1: '',
-      fos1: '',
-      qual1: '',
-      estName2: '',
-      from2: '',
-      to2: '',
-      fos2: '',
-      qual2: '',
-      estName3: '',
-      from3: '',
-      to3: '',
-      fos3: '',
-      qual3: '',
-      languageSpoken: '',
-      languageWritten: '',
-      textAreaWorkingSkill: '',
-      currentEmployer: '',
-      dateofjoining: '',
-      position: '',
-      salary: '',
-      nameOfEmployer1: '',
-      positionHeld1: '',
-      em_from1: '',
-      em_to1: '',
-      reasonOfLeaving1: '',
-      nameOfEmployer2: '',
-      positionHeld2: '',
-      em_from2: '',
-      em_to2: '',
-      reasonOfLeaving2: '',
-      nameOfEmployer3: '',
-      positionHeld3: '',
-      em_from3: '',
-      em_to3: '',
-      reasonOfLeaving3: '',
-      health: '',
-      diseases: '',
-      rel_name1: '',
-      rel_branch1: '',
-      rel_gender1: '',
-      rel_name2: '',
-      rel_branch2: '',
-      rel_gender2: '',
-      rel_name3: '',
-      rel_branch3: '',
-      rel_gender3: '',
-      expectedSalary: '',
-      startWorkDate: ''
-    });
-   
-const handleFormSubmit = (formData) => {
-  onSaveFormData(formData); // Call the onSaveFormData function with the current form data
+    firstName: '',
+    middleName: '',
+    lastName: '',
+    gender: '',
+    dob: '',
+    age: '',
+    nric: '',
+    pob: '',
+    nationality: '',
+    religion: '',
+    race: '',
+    estName1: '',
+    from1: '',
+    to1: '',
+    fos1: '',
+    qual1: '',
+    estName2: '',
+    from2: '',
+    to2: '',
+    fos2: '',
+    qual2: '',
+    estName3: '',
+    from3: '',
+    to3: '',
+    fos3: '',
+    qual3: '',
+    languageSpoken: '',
+    languageWritten: '',
+    textAreaWorkingSkill: '',
+    currentEmployer: '',
+    dateofjoining: '',
+    position: '',
+    salary: '',
+    nameOfEmployer1: '',
+    positionHeld1: '',
+    em_from1: '',
+    em_to1: '',
+    reasonOfLeaving1: '',
+    nameOfEmployer2: '',
+    positionHeld2: '',
+    em_from2: '',
+    em_to2: '',
+    reasonOfLeaving2: '',
+    nameOfEmployer3: '',
+    positionHeld3: '',
+    em_from3: '',
+    em_to3: '',
+    reasonOfLeaving3: '',
+    health: '',
+    diseases: '',
+    rel_name1: '',
+    rel_branch1: '',
+    rel_gender1: '',
+    rel_name2: '',
+    rel_branch2: '',
+    rel_gender2: '',
+    rel_name3: '',
+    rel_branch3: '',
+    rel_gender3: '',
+    expectedSalary: '',
+    startWorkDate: ''
+  });
 
-};
+  const handleFormSubmit = (formData) => {
+    onSaveFormData(formData); // Call the onSaveFormData function with the current form data
+
+  };
 
   const backhandler = () => {
     setStep(1);
@@ -164,13 +168,13 @@ const handleFormSubmit = (formData) => {
       expectedSalary: formData.expectedSalary,
       startWorkDate: formData.startWorkDate
     };
-  
-console.log(newFormData)
-    handleFormSubmit(newFormData,    setStep(3));
-  
+
+    console.log(newFormData)
+    handleFormSubmit(newFormData, setStep(3));
+
   };
-  
-   
+
+
 
   const handleYESClick = (event) => {
     event.preventDefault();
@@ -237,11 +241,13 @@ console.log(newFormData)
       expectedSalary: formData.expectedSalary,
       startWorkDate: formData.startWorkDate
     };
-  
-console.log(newFormData)
-    handleFormSubmit(newFormData,   setStep(4));
+
+    console.log(newFormData)
+    handleFormSubmit(newFormData, setStep(4));
   };
 
+  const [dateOfBirth, setDateOfBirth] = useState('');
+  const [age, setAge] = useState('');
 
   const handleInputChange = (event) => {
     const { name, value, type, checked } = event.target;
@@ -257,7 +263,30 @@ console.log(newFormData)
         [name]: value,
       }));
     }
+
+    if (name === 'dob') {
+      setDateOfBirth(value);
+      calculateAge(value);
+    }
+    // You can remove this block if the age input is read-only and only used to display the calculated age
+    if (name === 'age') {
+      setAge(value);
+    }
   };
+
+  const calculateAge = () => {
+    const birthDate = new Date(dateOfBirth);
+    const today = new Date();
+    const yearsDiff = today.getFullYear() - birthDate.getFullYear();
+
+    // Check if the birthday hasn't occurred yet this year
+    const hasNotHadBirthday = today.getMonth() < birthDate.getMonth() ||
+      (today.getMonth() === birthDate.getMonth() && today.getDate() < birthDate.getDate());
+
+    const calculatedAge = hasNotHadBirthday ? yearsDiff - 1 : yearsDiff;
+    setAge(calculatedAge.toString()); // Convert the age to a string before setting it in the state
+  };
+
   const [basicModal, setBasicModal] = useState(false);
   const toggleShow = () => setBasicModal(true);
 
@@ -271,8 +300,8 @@ console.log(newFormData)
   };
 
   return (
-  <>
-   <MDBNavbar sticky bgColor='#F1FFEB'>
+    <>
+      <MDBNavbar sticky bgColor='#F1FFEB'>
         <MDBContainer className='justify-content-center'>
           <MDBNavbarBrand href='#'>
             <img
@@ -285,484 +314,517 @@ console.log(newFormData)
         </MDBContainer>
       </MDBNavbar>
 
-    <div style={{margin:'100px', marginTop:'50px'}}>
-     <form>
-      <h2><b>Personal Details</b></h2>
-      <p>Please TICK and provide necessary information</p>
-    <hr />
-    <MDBRow className='mb-4'>
-            <MDBCol>
-              <MDBInput
-                name='firstName'
-                label='First name'
-                onChange={handleInputChange}
-              />
-            </MDBCol>
-            <MDBCol>
-              <MDBInput
-                name='middleName'
-                label='Middle name'
-                onChange={handleInputChange}
-              />
-            </MDBCol>
-            <MDBCol>
-              <MDBInput
-                name='lastName'
-                label='Last name'
-                onChange={handleInputChange}
-              />
-            </MDBCol>
-          </MDBRow>
-
-      <MDBRow className='mb-4'>
-        <MDBCol>
-          <p>Gender</p>
+      <div className='formBorder'>
+        <div className='pageContainer'>
           <form>
-          <MDBRadio
-      name="genderRadio"
-      id="genderRadioMale"
-      label="Male"
-      value = "Male"
-      inline
-      onChange={handleInputChange}
-    />
-    <MDBRadio
-      name="genderRadio"
-      id="genderRadioFemale"
-      label="Female"
-      value = "Female"
-      inline
-      onChange={handleInputChange}
-    />
-          </form>        
-          </MDBCol>
-        <MDBCol>
-        <p>Date Of Birth</p>
-        <MDBInput
-      name='dob'
-      type='date'
-      label='Date of Birth'
-      onChange={handleInputChange}
-    />
-        </MDBCol>
-        <MDBCol>
-        <MDBInput
-      name='age'
-      label='Age'
-      onChange={handleInputChange}
-    />
-        </MDBCol>
-        </MDBRow>
+            <div className='formContainer'>
+              <h2><b>Personal Details</b></h2>
+              <p>Please TICK and provide necessary information</p>
+              <hr />
+              <MDBRow className='mb-4'>
+                <MDBCol>
+                  <MDBInput
+                    name='firstName'
+                    label='First name'
+                    onChange={handleInputChange}
+                  />
+                </MDBCol>
+                <MDBCol>
+                  <MDBInput
+                    name='middleName'
+                    label='Middle name'
+                    onChange={handleInputChange}
+                  />
+                </MDBCol>
+                <MDBCol>
+                  <MDBInput
+                    name='lastName'
+                    label='Last name'
+                    onChange={handleInputChange}
+                  />
+                </MDBCol>
+              </MDBRow>
 
-      <MDBRow className='mb-4'>
-      
-      </MDBRow>
-     
-      <MDBInput
-  name='nric'
-  label='NRIC/FIN No.'
-  onChange={handleInputChange}
-/>
-      <MDBRow>
-        <MDBCol>
-        <MDBInput
-  name='pob'
-  label='Place of Birth'
-  onChange={handleInputChange}
-/>
-        </MDBCol>
-        <MDBCol>
-        <p>Nationality</p>
-        <MDBRadio
-  name="nationalityRadio"
- 
-  label="Malaysian"
-  value='Malaysian'
-  inline
-  onChange={handleInputChange}
-/>
-<MDBRadio
-  name="nationalityRadio"
-  id="nationalityRadioPR"
-  label="PR"
-  value = "PR"
-  inline
-  onChange={handleInputChange}
-/>
-<MDBRadio
-  name="nationalityRadio"
-  id="nationalityRadioForeigner"
-  label="Foreigner"
-  inline
-  onChange={handleInputChange}
-/>
-        </MDBCol>
+              <MDBRow className='mb-4'>
+                <MDBCol>
+                  <p>Gender</p>
+                  <form>
+                    <MDBRadio
+                      name="genderRadio"
+                      id="genderRadioMale"
+                      label="Male"
+                      value="Male"
+                      inline
+                      onChange={handleInputChange}
+                    />
+                    <MDBRadio
+                      name="genderRadio"
+                      id="genderRadioFemale"
+                      label="Female"
+                      value="Female"
+                      inline
+                      onChange={handleInputChange}
+                    />
+                  </form>
+                </MDBCol>
+                <MDBCol>
+                  <MDBInput
+                    name='dob'
+                    type='date'
+                    label='Date of Birth'
+                    onChange={handleInputChange}
+                  />
+                </MDBCol>
+                <MDBCol>
+                  <MDBInput
+                    name='age'
+                    label='Age'
+                    value={age}
+                    onChange={handleInputChange}
+                  />
+                </MDBCol>
+              </MDBRow>
 
-      </MDBRow>
-      
-      <MDBRow className='mb-4'>
-        <MDBCol>
-          <p>Religion</p>
-          <MDBRadio
-  name="religionRadio"
-  id="religionRadioBuddhist"
-  label="Buddhist"
-  value= "Buddhist"
-  inline
-  onChange={handleInputChange}
-/>
-<MDBRadio
-  name="religionRadio"
-  id="religionRadioChristian"
-  label="Christian"
-  value= "Christian"
-  inline
-  onChange={handleInputChange}
-/>
-<MDBRadio
-  name="religionRadio"
-  id="religionRadioHindu"
-  value = "Hindu"
-  label="Hindu"
-  inline
-  onChange={handleInputChange}
-/>
-<MDBRadio
-  name="religionRadio"
-  id="religionRadioMuslim"
-  value = "Muslim"
-  label="Muslim"
-  inline
-  onChange={handleInputChange}
-/>
-<MDBRadio
-  name="religionRadio"
-  id="religionRadioOthers"
-  value = "Others"
-  label="Others"
-  inline
-  onChange={handleInputChange}
-/>
-        </MDBCol>
-        <MDBCol>
-        <p>Race</p>
-        <MDBRadio
-  name="raceRadio"
-  id="raceRadioChinese"
-  value = "Chinese"
-  label="Chinese"
-  inline
-  onChange={handleInputChange}
+              <MDBRow className='mb-4'>
 
-/>
-<MDBRadio
-  name="raceRadio"
-  id="raceRadioIndian"
-  label="Indian"
-  value = "India"
-  inline
-  onChange={handleInputChange}
-/>
-<MDBRadio
-  name="raceRadio"
-  id="raceRadioMalay"
-  value = "Malay"
-  label="Malay"
-  inline
-  onChange={handleInputChange}
-/>
-<MDBRadio
-  name="raceRadio"
-  value = "Others"
-  id="raceRadioOthers"
-  label="Others"
-  inline
-  onChange={handleInputChange}
-/>
-        </MDBCol>
-        </MDBRow>
-        
-        <hr />
-        <h2><b>Education / Academic Qualification</b></h2>
-        <p>Please attach copies of certificate</p>
+              </MDBRow>
 
-        <hr />
+              <MDBInput
+                name='nric'
+                label='NRIC/FIN No.'
+                onChange={handleInputChange}
+              />
+              <MDBRow>
+                <MDBCol>
+                  <MDBInput
+                    name='pob'
+                    label='Place of Birth'
+                    onChange={handleInputChange}
+                  />
+                </MDBCol>
+                <MDBCol>
+                  <p>Nationality</p>
+                  <MDBRadio
+                    name="nationalityRadio"
 
-        <MDBTable bordered>
-      <MDBTableHead>
-        <tr>
-          <th scope='col'></th>
-          <th scope='col'>Establishment Name</th>
-          <th scope='col'>From (Year)</th>
-          <th scope='col'>To (Year)</th>
-          <th scope='col'>Field of Studies (e.g Business)</th>
-          <th scope='col'>Qualifications (e.g SPM)</th>
-        </tr>
-      </MDBTableHead>
-      <MDBTableBody>
-        <tr>
-          <th scope='row'>University/ College/ Technical</th>
-          <td><MDBInput name='estName1' onChange={handleInputChange}/>
-          </td>
-          <td><MDBInput name='from1' onChange={handleInputChange}/>
-          </td>
-          <td><MDBInput name='to1' onChange={handleInputChange}/>
-          </td>
-          <td><MDBInput name='fos1' onChange={handleInputChange}/>
-          </td>
-          <td><MDBInput name='qual1' onChange={handleInputChange}/>
-          </td>
-        </tr>
-        <tr>
-          <th scope='row'>University/ College/ Technical</th>
-          <td><MDBInput name='estName2' onChange={handleInputChange}/>
-          </td>
-          <td><MDBInput name='from2'onChange={handleInputChange}/>
-          </td>
-          <td><MDBInput name='to2'onChange={handleInputChange}/>
-          </td>
-          <td><MDBInput name='fos2'onChange={handleInputChange}/>
-          </td>
-          <td><MDBInput name='qual2'onChange={handleInputChange}/>
-          </td>
-        </tr>
-        <tr>
-          <th scope='row'>Secondary</th>
-          <td><MDBInput name ='estName3'onChange={handleInputChange}/>
-          </td>
-          <td><MDBInput name ='from3'onChange={handleInputChange}/>
-          </td>
-          <td><MDBInput name='to3'onChange={handleInputChange}/>
-          </td>
-          <td><MDBInput name='fos3'onChange={handleInputChange}/>
-          </td>
-          <td><MDBInput name='qual3'onChange={handleInputChange}/>
-          </td>
-        </tr>
-      </MDBTableBody>
-    </MDBTable>
+                    label="Malaysian"
+                    value='Malaysian'
+                    inline
+                    onChange={handleInputChange}
+                  />
+                  <MDBRadio
+                    name="nationalityRadio"
+                    id="nationalityRadioPR"
+                    label="PR"
+                    value="PR"
+                    inline
+                    onChange={handleInputChange}
+                  />
+                  <MDBRadio
+                    name="nationalityRadio"
+                    id="nationalityRadioForeigner"
+                    label="Foreigner"
+                    inline
+                    onChange={handleInputChange}
+                  />
+                </MDBCol>
 
-    <hr />
-        <h2>Language</h2>
-        <hr />
+              </MDBRow>
 
-        <MDBRow>
-        <MDBCol>
-        <MDBInput wrapperClass='mb-4' name='languageSpoken' label='Language(s) Spoken 'onChange={handleInputChange}/>
-        <MDBInput wrapperClass='mb-4' name='languageWritten' label='Language(s) Written ' onChange={handleInputChange}/>
-        </MDBCol>
-        </MDBRow>
+              <MDBRow className='mb-4'>
+                <MDBCol>
+                  <p>Religion</p>
+                  <MDBRadio
+                    name="religionRadio"
+                    id="religionRadioBuddhist"
+                    label="Buddhist"
+                    value="Buddhist"
+                    inline
+                    onChange={handleInputChange}
+                  />
+                  <MDBRadio
+                    name="religionRadio"
+                    id="religionRadioChristian"
+                    label="Christian"
+                    value="Christian"
+                    inline
+                    onChange={handleInputChange}
+                  />
+                  <MDBRadio
+                    name="religionRadio"
+                    id="religionRadioHindu"
+                    value="Hindu"
+                    label="Hindu"
+                    inline
+                    onChange={handleInputChange}
+                  />
+                  <MDBRadio
+                    name="religionRadio"
+                    id="religionRadioMuslim"
+                    value="Muslim"
+                    label="Muslim"
+                    inline
+                    onChange={handleInputChange}
+                  />
+                  <MDBRadio
+                    name="religionRadio"
+                    id="religionRadioOthers"
+                    value="Others"
+                    label="Others"
+                    inline
+                    onChange={handleInputChange}
+                  />
+                </MDBCol>
+                <MDBCol>
+                  <p>Race</p>
+                  <MDBRadio
+                    name="raceRadio"
+                    id="raceRadioChinese"
+                    value="Chinese"
+                    label="Chinese"
+                    inline
+                    onChange={handleInputChange}
 
-        <hr />
-        <h2>Working Skill and Experiences</h2>
-        <hr />
-        <MDBRow>
-        <MDBCol>
-        <MDBTextArea label='Please provide information on your experiences above.' placeholder='Type here...' name='textAreaWorkingSkill' rows={5} onChange={handleInputChange}/>        
-        </MDBCol>
-        </MDBRow>
+                  />
+                  <MDBRadio
+                    name="raceRadio"
+                    id="raceRadioIndian"
+                    label="Indian"
+                    value="India"
+                    inline
+                    onChange={handleInputChange}
+                  />
+                  <MDBRadio
+                    name="raceRadio"
+                    id="raceRadioMalay"
+                    value="Malay"
+                    label="Malay"
+                    inline
+                    onChange={handleInputChange}
+                  />
+                  <MDBRadio
+                    name="raceRadio"
+                    value="Others"
+                    id="raceRadioOthers"
+                    label="Others"
+                    inline
+                    onChange={handleInputChange}
+                  />
+                </MDBCol>
+              </MDBRow>
+            </div>
 
-        <hr />
-        <h2>Current Company</h2>
-        <hr />
-        <MDBRow>
-        <MDBCol>
-     
-            <MDBInput wrapperClass='mb-4' name='currentEmployer' label='Name of current employer or NONE if not employed '  onChange={handleInputChange} />
-        </MDBCol>
-        </MDBRow>
-        <MDBRow>
-        <MDBCol>
-          <MDBInput name='dateofjoining' type = "date" label='Date of joining'onChange={handleInputChange} />
-        </MDBCol>
-        <MDBCol>
-          <MDBInput name='position' label='Position'onChange={handleInputChange} />
-        </MDBCol>
-        <MDBCol>
-          <MDBInput name='salary' label='Salary'onChange={handleInputChange} />
-        </MDBCol>
-        </MDBRow>
-        
-        <hr />
-        <h2>Employment History</h2>
-        <hr />
+            <div className='formContainer'>
+              <hr />
+              <h2><b>Education / Academic Qualification</b></h2>
+              <p>Please attach copies of certificate</p>
 
-        <MDBTable bordered>
-      <MDBTableHead>
-        <tr>
-          <th scope='col'></th>
-          <th scope='col'>Name of Employer</th>
-          <th scope='col'>Position Held</th>
-          <th scope='col'>From</th>
-          <th scope='col'>To</th>
-          <th scope='col'>Reason of Leaving</th>
-        </tr>
-      </MDBTableHead>
-      <MDBTableBody>
-        <tr>
-          <th scope='row'>1</th>
-          <td><MDBInput name='nameOfEmployer1'onChange={handleInputChange}/>
-          </td>
-          <td><MDBInput name='positionHeld1'onChange={handleInputChange}/>
-          </td>
-          <td><MDBInput name='em_from1'onChange={handleInputChange}/>
-          </td>
-          <td><MDBInput name='em_to1'onChange={handleInputChange}/>
-          </td>
-          <td><MDBInput name='reasonOfLeaving1'onChange={handleInputChange}/>
-          </td>
-        </tr>
-        <tr>
-          <th scope='row'>2</th>
-          <td><MDBInput name='nameOfEmployer2'onChange={handleInputChange}/>
-          </td>
-          <td><MDBInput name='positionHeld2'onChange={handleInputChange}/>
-          </td>
-          <td><MDBInput name='em_from2'onChange={handleInputChange}/>
-          </td>
-          <td><MDBInput name='em_to2'onChange={handleInputChange}/>
-          </td>
-          <td><MDBInput name='reasonOfLeaving2'onChange={handleInputChange}/>
-          </td>
-        </tr>
-        <tr>
-          <th scope='row'>3</th>
-          <td><MDBInput name='nameOfEmployer3'onChange={handleInputChange}/>
-          </td>
-          <td><MDBInput name='positionHeld3'onChange={handleInputChange}/>
-          </td>
-          <td><MDBInput name='em_from3'onChange={handleInputChange}/>
-          </td>
-          <td><MDBInput name='em_to3'onChange={handleInputChange}/>
-          </td>
-          <td><MDBInput name='reasonOfLeaving3'onChange={handleInputChange}/>
-          </td>
-        </tr>
-      </MDBTableBody>
-    </MDBTable>
+              <hr />
 
-    <hr />
-    <h2>Health Condition and Status</h2>
-    <p>please TICK and provide necessary information</p>
-    <hr />
+              <MDBTable bordered>
+                <MDBTableHead>
+                  <tr>
+                    <th scope='col'></th>
+                    <th scope='col'>Establishment Name</th>
+                    <th scope='col'>From (Year)</th>
+                    <th scope='col'>To (Year)</th>
+                    <th scope='col'>Field of Studies (e.g Business)</th>
+                    <th scope='col'>Qualifications (e.g SPM)</th>
+                  </tr>
+                </MDBTableHead>
+                <MDBTableBody>
+                  <tr>
+                    <th scope='row'>University/ College/ Technical</th>
+                    <td><MDBInput name='estName1' onChange={handleInputChange} />
+                    </td>
+                    <td><MDBInput name='from1' onChange={handleInputChange} />
+                    </td>
+                    <td><MDBInput name='to1' onChange={handleInputChange} />
+                    </td>
+                    <td><MDBInput name='fos1' onChange={handleInputChange} />
+                    </td>
+                    <td><MDBInput name='qual1' onChange={handleInputChange} />
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope='row'>University/ College/ Technical</th>
+                    <td><MDBInput name='estName2' onChange={handleInputChange} />
+                    </td>
+                    <td><MDBInput name='from2' onChange={handleInputChange} />
+                    </td>
+                    <td><MDBInput name='to2' onChange={handleInputChange} />
+                    </td>
+                    <td><MDBInput name='fos2' onChange={handleInputChange} />
+                    </td>
+                    <td><MDBInput name='qual2' onChange={handleInputChange} />
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope='row'>Secondary</th>
+                    <td><MDBInput name='estName3' onChange={handleInputChange} />
+                    </td>
+                    <td><MDBInput name='from3' onChange={handleInputChange} />
+                    </td>
+                    <td><MDBInput name='to3' onChange={handleInputChange} />
+                    </td>
+                    <td><MDBInput name='fos3' onChange={handleInputChange} />
+                    </td>
+                    <td><MDBInput name='qual3' onChange={handleInputChange} />
+                    </td>
+                  </tr>
+                </MDBTableBody>
+              </MDBTable>
+            </div>
 
-    <MDBRow className='mb-4'>
-        <MDBCol>
-          <p>Health</p>
-          <MDBRadio name="healthRadio" id="healthRadioGood" label="Good"  value="Good" inline onChange={handleInputChange}/>
-          <MDBRadio name="healthRadio" id="healthRadioBad" label="Bad" value="Bad" inline onChange={handleInputChange}/>
-          </MDBCol>
-          <MDBCol>
-          <MDBInput name='diseases' label='If chosen Bad, what are the diseases?'onChange={handleInputChange}/>
-          </MDBCol>
-          </MDBRow>
+            <div className='formContainer'>
+              <hr />
+              <h2><b>Language</b></h2>
+              <hr />
+              <MDBRow>
+                <MDBCol>
+                  <MDBInput wrapperClass='mb-4' name='languageSpoken' label='Language(s) Spoken ' onChange={handleInputChange} />
+                  <MDBInput wrapperClass='mb-4' name='languageWritten' label='Language(s) Written ' onChange={handleInputChange} />
+                </MDBCol>
+              </MDBRow>
+            </div>
 
-        <hr />
-        <h2>Relatives working in Huachang Growmax</h2>
-        <hr />
+            <div className='formContainer'>
+              <hr />
+              <h2><b>Working Skill and Experiences</b></h2>
+              <hr />
+              <MDBRow>
+                <MDBCol>
+                  <MDBTextArea label='Please provide information on your experiences above.' placeholder='Type here...' name='textAreaWorkingSkill' rows={5} onChange={handleInputChange} />
+                </MDBCol>
+              </MDBRow>
+            </div>
 
-        <MDBTable bordered>
-      <MDBTableHead>
-        <tr>
-          <th scope='col'></th>
-          <th scope='col'>Name</th>
-          <th scope='col'>Branch/Department</th>
-          <th scope='col'>Gender (M/F)</th>
-        </tr>
-      </MDBTableHead>
-      <MDBTableBody>
-        <tr>
-          <th scope='row'>1</th>
-          <td><MDBInput  name='rel_name1'onChange={handleInputChange}/>
-          </td>
-          <td><MDBInput name='rel_branch1'onChange={handleInputChange}/>
-          </td>
-          <td><MDBInput  name='rel_gender1'onChange={handleInputChange}/>
-          </td>
-        </tr>
-        <tr>
-          <th scope='row'>2</th>
-          <td><MDBInput  name='rel_name2'onChange={handleInputChange}/>
-          </td>
-          <td><MDBInput  name='rel_branch2'onChange={handleInputChange}/>
-          </td>
-          <td><MDBInput  name='rel_gender2'onChange={handleInputChange}/>
-          </td>
-        </tr>
-        <tr>
-          <th scope='row'>3</th>
-          <td><MDBInput  name='rel_name3'onChange={handleInputChange}/>
-          </td>
-          <td><MDBInput  name='rel_branch3'onChange={handleInputChange}/>
-          </td>
-          <td><MDBInput name='rel_gender3'onChange={handleInputChange}/>
-          </td>
-        </tr>
-      </MDBTableBody>
-    </MDBTable>
+            <div className='formContainer'>
+              <hr />
+              <h2><b>Current Company</b></h2>
+              <hr />
+              <MDBRow>
+                <MDBCol>
+                  <MDBInput wrapperClass='mb-4' name='currentEmployer' label='Name of current employer or NONE if not employed ' onChange={handleInputChange} />
+                </MDBCol>
+              </MDBRow>
+              <MDBRow>
+                <MDBCol>
+                  <MDBInput name='dateofjoining' type="date" label='Date of joining' onChange={handleInputChange} />
+                </MDBCol>
+                <MDBCol>
+                  <MDBInput name='position' label='Position' onChange={handleInputChange} />
+                </MDBCol>
+                <MDBCol>
+                  <MDBInput name='salary' label='Salary' onChange={handleInputChange} />
+                </MDBCol>
+              </MDBRow>
+            </div>
 
-<br></br><br></br>
-    <MDBRow>
-    <MDBCol>
-        <MDBInput name='expectedSalary' label='Expected Salary'onChange={handleInputChange} />
-    </MDBCol>
-    <MDBCol>
-        <MDBInput name='startWorkDate' type = 'date' label='If offered this job, when can you start work?'onChange={handleInputChange} />
-    </MDBCol>
-    </MDBRow>
-    <br></br><br></br>
+            <div className='formContainer'>
+              <hr />
+              <h2><b>Employment History</b></h2>
+              <hr />
 
-    <div class="d-flex justify-content-center">
-     <MDBRow>
-      <MDBCol>
-       <button className='button buttonBack' onClick={backhandler}>
-        Back
-       </button>
-      </MDBCol>
-      <MDBCol>
-       <button className='button buttonNext' type='button' onClick={toggleShow} color='primary'>
-        Next
-       </button>
-      </MDBCol>
-     </MDBRow>
+              <MDBTable bordered>
+                <MDBTableHead>
+                  <tr>
+                    <th scope='col'></th>
+                    <th scope='col'>Name of Employer</th>
+                    <th scope='col'>Position Held</th>
+                    <th scope='col'>From</th>
+                    <th scope='col'>To</th>
+                    <th scope='col'>Reason of Leaving</th>
+                  </tr>
+                </MDBTableHead>
+                <MDBTableBody>
+                  <tr>
+                    <th scope='row'>1</th>
+                    <td><MDBInput name='nameOfEmployer1' onChange={handleInputChange} />
+                    </td>
+                    <td><MDBInput name='positionHeld1' onChange={handleInputChange} />
+                    </td>
+                    <td><MDBInput name='em_from1' onChange={handleInputChange} />
+                    </td>
+                    <td><MDBInput name='em_to1' onChange={handleInputChange} />
+                    </td>
+                    <td><MDBInput name='reasonOfLeaving1' onChange={handleInputChange} />
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope='row'>2</th>
+                    <td><MDBInput name='nameOfEmployer2' onChange={handleInputChange} />
+                    </td>
+                    <td><MDBInput name='positionHeld2' onChange={handleInputChange} />
+                    </td>
+                    <td><MDBInput name='em_from2' onChange={handleInputChange} />
+                    </td>
+                    <td><MDBInput name='em_to2' onChange={handleInputChange} />
+                    </td>
+                    <td><MDBInput name='reasonOfLeaving2' onChange={handleInputChange} />
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope='row'>3</th>
+                    <td><MDBInput name='nameOfEmployer3' onChange={handleInputChange} />
+                    </td>
+                    <td><MDBInput name='positionHeld3' onChange={handleInputChange} />
+                    </td>
+                    <td><MDBInput name='em_from3' onChange={handleInputChange} />
+                    </td>
+                    <td><MDBInput name='em_to3' onChange={handleInputChange} />
+                    </td>
+                    <td><MDBInput name='reasonOfLeaving3' onChange={handleInputChange} />
+                    </td>
+                  </tr>
+                </MDBTableBody>
+              </MDBTable>
+            </div>
 
-      <MDBModal show={basicModal} setShow={setBasicModal} tabIndex='-1'>
-        <MDBModalDialog>
-          <MDBModalContent>
-            <MDBModalHeader backgroundColor="green">
-              <MDBModalTitle>Before we continue...</MDBModalTitle>
-              <MDBBtn className="btn-close" color='none' onClick={handleClose}></MDBBtn>
-            </MDBModalHeader>
-            <MDBModalBody><h4 style={{textAlign:'center'}}>Do you have a job position in mind that you wanted to apply for?</h4></MDBModalBody>
+            <div className='formContainer'>
+              <hr />
+              <h2><b>Health Condition and Status</b></h2>
+              <p>please TICK and provide necessary information</p>
+              <hr />
 
-            <MDBModalFooter style={{justifyContent:"center"}}>
+              <MDBRow className='mb-4'>
+                <MDBCol>
+                  <p>Health</p>
+                  <MDBRadio name="healthRadio" id="healthRadioGood" label="Good" value="Good" inline onChange={handleInputChange} />
+                  <MDBRadio name="healthRadio" id="healthRadioBad" label="Bad" value="Bad" inline onChange={handleInputChange} />
+                </MDBCol>
+                <MDBCol>
+                  <MDBInput name='diseases' label='If chosen Bad, what are the diseases?' onChange={handleInputChange} />
+                </MDBCol>
+              </MDBRow>
+            </div>
 
-            <MDBTooltip tag='a' title = "Take the Big Five Personalities test to find out which position is suitable for you!">  
-            <button className='button buttonNext' color='danger' onClick={handleNOClick}>No</button>
-            </MDBTooltip>
+            <div className='formContainer'>
+              <hr />
+              <h2><b>Relatives working in Huachang Growmax</b></h2>
+              <hr />
 
-            <MDBTooltip tag='a' title = "Proceed to next step.">  
-            <button className='button buttonNext' color='green' onClick={handleYESClick}>Yes</button>
-            </MDBTooltip>
-            </MDBModalFooter>
-          </MDBModalContent>
-        </MDBModalDialog>
-      </MDBModal>
-      
-    </div>
-    </form>
-    </div>
+              <MDBTable bordered>
+                <MDBTableHead>
+                  <tr>
+                    <th scope='col'></th>
+                    <th scope='col'>Name</th>
+                    <th scope='col'>Branch/Department</th>
+                    <th scope='col'>Gender (M/F)</th>
+                  </tr>
+                </MDBTableHead>
+                <MDBTableBody>
+                  <tr>
+                    <th scope='row'>1</th>
+                    <td><MDBInput name='rel_name1' onChange={handleInputChange} />
+                    </td>
+                    <td><MDBInput name='rel_branch1' onChange={handleInputChange} />
+                    </td>
+                    <td><MDBInput name='rel_gender1' onChange={handleInputChange} />
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope='row'>2</th>
+                    <td><MDBInput name='rel_name2' onChange={handleInputChange} />
+                    </td>
+                    <td><MDBInput name='rel_branch2' onChange={handleInputChange} />
+                    </td>
+                    <td><MDBInput name='rel_gender2' onChange={handleInputChange} />
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope='row'>3</th>
+                    <td><MDBInput name='rel_name3' onChange={handleInputChange} />
+                    </td>
+                    <td><MDBInput name='rel_branch3' onChange={handleInputChange} />
+                    </td>
+                    <td><MDBInput name='rel_gender3' onChange={handleInputChange} />
+                    </td>
+                  </tr>
+                </MDBTableBody>
+              </MDBTable>
+            </div>
 
-    <MDBFooter style={{ backgroundColor: "#F1FFEB" }}>
-    <div className='text-center p-4' style={{ backgroundColor: 'rgba(0, 0, 0, 0.05)' }}>
+            <div className='formContainer'>
+              <MDBRow>
+                <MDBCol>
+                  <MDBInput name='expectedSalary' label='Expected Salary' onChange={handleInputChange} />
+                </MDBCol>
+                <MDBCol>
+                  <MDBInput name='startWorkDate' type='date' label='If offered this job, when can you start work?' onChange={handleInputChange} />
+                </MDBCol>
+              </MDBRow>
+            </div>
+
+            <div class="d-flex justify-content-center">
+              <MDBRow>
+                <MDBCol>
+                  <button className='button buttonBack' onClick={backhandler}>
+                    Back
+                  </button>
+                </MDBCol>
+                <MDBCol>
+                  <button className='button buttonNext' type='button' onClick={toggleShow} color='primary'>
+                    Next
+                  </button>
+                </MDBCol>
+              </MDBRow>
+
+              <MDBModal show={basicModal} setShow={setBasicModal} tabIndex='-1'>
+                <MDBModalDialog>
+                  <MDBModalContent>
+                    <MDBModalHeader backgroundColor="green">
+                      <MDBModalTitle>Before we continue...</MDBModalTitle>
+                      <MDBBtn className="btn-close" color='none' onClick={handleClose}></MDBBtn>
+                    </MDBModalHeader>
+                    <MDBModalBody><h4 style={{ textAlign: 'center' }}>Do you have a job position in mind that you wanted to apply for?</h4></MDBModalBody>
+
+                    <MDBModalFooter style={{ justifyContent: "center" }}>
+
+                      <MDBRow>
+                        <MDBCol sm='6'>
+                          <MDBCard alignment='center'>
+                            <MDBCardBody>
+                              <MDBCardTitle>Big 5 Personalites Test</MDBCardTitle>
+                              <MDBCardText>
+                              Take the Big Five Personalities test to find out which position is suitable for you!
+                              </MDBCardText>
+                              <button className='button buttonNext' color='danger' onClick={handleNOClick}>No</button>
+                            </MDBCardBody>
+                          </MDBCard>
+                        </MDBCol>
+                        <MDBCol sm='6'>
+                          <MDBCard alignment='center'>
+                            <MDBCardBody>
+                              <MDBCardTitle>Job Interest : Position available</MDBCardTitle>
+                              <MDBCardText>
+                              Proceed to next step.  
+                              </MDBCardText><br /><br />
+                              <button className='button buttonNext' color='green' onClick={handleYESClick}>Yes</button>
+                            </MDBCardBody>
+                          </MDBCard>
+                        </MDBCol>
+                      </MDBRow>
+                    </MDBModalFooter>
+                  </MDBModalContent>
+                </MDBModalDialog>
+              </MDBModal>
+
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <MDBFooter style={{ backgroundColor: "#F1FFEB" }}>
+        <div className='text-center p-4' style={{ backgroundColor: 'rgba(0, 0, 0, 0.05)' }}>
           HUACHANG GROWMAX M SDN BHD
         </div>
-        </MDBFooter>
+      </MDBFooter>
 
 
     </>
   );
-  
+
 }
 
 export default PersonalDetails;

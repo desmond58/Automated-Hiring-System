@@ -5,7 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  
+
 }
 
 code {
@@ -42,13 +42,24 @@ code {
   color: #fff;
   background-color: #000;
   cursor: pointer;
-  }
+}
 
+label {
+  display: block;
+}
+
+.formContainer {
+  margin-bottom: 80px;
+}
+
+.pageContainer {
+  margin: 100px;
+  margin-top: 50px;
  
+}
 
-  
-  
-
-  label {
-    display: block;
-  }
+.formBorder {
+  border: 0.5px solid lightgray;
+  border-radius: 12px;
+  margin: 80px;
+}
