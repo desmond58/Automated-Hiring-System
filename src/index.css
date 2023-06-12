@@ -54,6 +54,7 @@ label {
   margin-right: 80px;
 }
 
+
 .pageContainer {
   margin-left: 60px;
   margin-right: 60px;
@@ -68,4 +69,21 @@ label {
   margin-left: 80px;
   margin-right: 80px;
   margin-top: 20px;
+}
+
+.cardContainer {
+  margin-left: 150px;
+  margin-right: 150px;
+}
+
+.big5Border {
+  border: 0.5px solid lightgray;
+  border-radius: 12px;
+  margin-left: 80px;
+  margin-right: 80px;
+  margin-top: 20px;
+}
+
+.big5Container {
+ margin: 30px;
 }

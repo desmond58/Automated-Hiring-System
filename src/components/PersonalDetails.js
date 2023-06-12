@@ -269,9 +269,9 @@ const PersonalDetails = ({ step, setStep, onSaveFormData }) => {
       calculateAge(value);
     }
     // You can remove this block if the age input is read-only and only used to display the calculated age
-    if (name === 'age') {
-      setAge(value);
-    }
+    // if (name === 'age') {
+    //   setAge(value);
+    // }
   };
 
   const calculateAge = () => {
@@ -381,7 +381,6 @@ const PersonalDetails = ({ step, setStep, onSaveFormData }) => {
                     <MDBInput
                       name='age'
                       label='Age'
-                      value={age}
                       onChange={handleInputChange}
                     />
                   </MDBCol>
