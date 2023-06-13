@@ -120,8 +120,8 @@ const Sales = ({ combinedFormData, onSaveFormData, onNext, onBack }) => {
           <div className='formBorder'>
             <div className='pageContainer'>
               <p><b>Do you have a driver's license and be able to travel if needed?</b></p>
-              <MDBRadio name="licence" id="flexRadioDefault1" label="Yes" inline defaultChecked />
-              <MDBRadio name="licence" id="flexRadioDefault1" label="No" inline />
+              <MDBRadio name="licence" id="flexRadioDefault1" label="Yes"   />
+              <MDBRadio name="licence" id="flexRadioDefault1" label="No"  />
             </div>
           </div>
 
