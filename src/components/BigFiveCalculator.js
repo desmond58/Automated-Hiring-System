@@ -1,11 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { createClient } from '@supabase/supabase-js';
+import logo from "../images/huachanglogo.png";
+import {
+  MDBContainer,
+  MDBNavbar,
+  MDBNavbarBrand,
+  MDBCard,
+  MDBCardBody,
+  MDBCardTitle,
+  MDBCardText,
+  MDBFooter
+} from "mdb-react-ui-kit";
 
 const supabaseUrl = 'https://aehwgrirrnhmatqmqcsa.supabase.co';
 const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFlaHdncmlycm5obWF0cW1xY3NhIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTY4MDg2NTg4MywiZXhwIjoxOTk2NDQxODgzfQ.DeXxoWY65kzpbvdxME16mAHj2KGMwDRg_jEGgUIxKc0';
 const supabase = createClient(supabaseUrl, supabaseKey);
 
-const BigFiveCalculator = ({ onBack,id }) => {
+const BigFiveCalculator = ({ onBack, id }) => {
   const [formData, setFormData] = useState(null);
   const [suggestedFields, setSuggestedFields] = useState([]);
   const [highestPath, setHighestPath] = useState('');
@@ -100,25 +111,74 @@ const BigFiveCalculator = ({ onBack,id }) => {
   }, [formData]);
 
   return (
-    <div>
-<h2>Tracking Number: {trackingNumber}</h2>
-      <h2>Suggested Career Fields:</h2>
-      <p>Highest Value Path: <b>{highestPath}</b> </p>
-      <p>Scores:</p>
-      <ul>
-        <li>Extroversion : {scores.E}</li>
-        <li>Agreeableness: {scores.A}</li>
-        <li>Conscientiousness: {scores.C}</li>
-        <li>Neuroticism: {scores.N}</li>
-        <li>Openness to Experience : {scores.O}</li>
-      </ul>
-      <h2>Suggested Career Fields:</h2>
-      <ul>
-        {suggestedFields.map((field) => (
-          <li key={field}>{field}</li>
-        ))}
-      </ul>  <button className='button buttonNext' color='green' onClick={backHandler}>Back</button>
-    </div>
+    <>
+
+      <MDBNavbar sticky bgColor='#F1FFEB'>
+        <MDBContainer className='justify-content-center'>
+          <MDBNavbarBrand href='#'>
+            <img
+              src={logo}
+              height='100'
+              alt=''
+              loading='lazy'
+            />
+          </MDBNavbarBrand>
+        </MDBContainer>
+      </MDBNavbar>
+
+
+      <div className='pageContainer'>
+        <div className='formContainer'>
+          <h2><b>Big 5 Personalities Test Scores:</b></h2>
+          <p>Here are your scores for the Big 5 Personalities Test</p>
+          <hr />
+
+          <div class="d-flex justify-content-center">
+            <MDBCard alignment='center' className='w-50'>
+              <MDBCardBody>
+                <MDBCardTitle>Tracking Number</MDBCardTitle>
+                <MDBCardText>
+                  {trackingNumber}
+                </MDBCardText>
+              </MDBCardBody>
+            </MDBCard>
+          </div>
+
+          <div className='formBorder'>
+            <div className='pageContainer'>
+              <h2>Scores</h2>
+              <ul>
+                <li>Extroversion : {scores.E}</li>
+                <li>Agreeableness: {scores.A}</li>
+                <li>Conscientiousness: {scores.C}</li>
+                <li>Neuroticism: {scores.N}</li>
+                <li>Openness to Experience : {scores.O}</li>
+              </ul>
+              <p>Highest Value Path: <b>{highestPath}</b> </p>
+              <h2>Suggested Career Fields:</h2>
+              <ul>
+                {suggestedFields.map((field) => (
+                  <li key={field}>{field}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+
+
+
+        <div class="d-flex justify-content-center">
+          <button className='button buttonNext' onClick={backHandler}>Home</button>
+        </div>
+      </div>
+
+      <MDBFooter style={{ backgroundColor: "#F1FFEB" }}>
+        <div className='text-center p-4' style={{ backgroundColor: 'rgba(0, 0, 0, 0.05)' }}>
+          HUACHANG GROWMAX M SDN BHD
+        </div>
+      </MDBFooter>
+
+    </>
   );
 };
 

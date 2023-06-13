@@ -36,33 +36,33 @@ const App = () => {
         .select('status')
         .eq('trackingNumber', trackingNumber)
         .limit(1);
-  
+
       // Perform the Supabase API request to fetch the status from the 'bigfive' table
       const { data: bigfiveData, error: bigfiveError } = await supabase
         .from('bigfive')
         .select('status')
         .eq('trackingNumber', trackingNumber)
         .limit(1);
-  
+
       if (confirmationError) {
         console.error('Error retrieving status from confirmation table:', confirmationError);
         return;
       }
-  
+
       if (bigfiveError) {
         console.error('Error retrieving status from bigfive table:', bigfiveError);
         return;
       }
-  
+
       if (confirmationData.length === 0 && bigfiveData.length === 0) {
         console.log('No matching tracking number found');
         return;
       }
-  
+
       const retrievedStatus = confirmationData.length > 0 ? confirmationData[0].status : bigfiveData[0].status;
-  
+
       console.log('Retrieved status:', retrievedStatus);
-  
+
       // Update the status in the state or handle the response as needed
       setStatus(retrievedStatus);
       handleStepChange(8, trackingNumber);
@@ -70,7 +70,7 @@ const App = () => {
       console.error('Error retrieving status:', error);
     }
   };
-  
+
   const handleStepChange = (newStep, trackingNumber) => {
     setStep(newStep);
     setTrackingId(trackingNumber); // Set the trackingNumber in the state
@@ -78,8 +78,8 @@ const App = () => {
 
   const handleSaveFormData = (data) => {
     setFormData({ ...formData, ...data });
-  };  
-  
+  };
+
   const handleGenerateId = (id) => {
     setGeneratedId(id);
     setStep(10); // Move to step 10 (BigFiveCalculator)
@@ -92,7 +92,7 @@ const App = () => {
     }));
     setStep(10); // Move to step 10 (BigFiveCalculator)
   };
-  
+
   const handleNext = () => {
     setStep(step + 1);
   };
@@ -145,13 +145,13 @@ const App = () => {
           onNext={handleBigFiveCalculator}
           onBack={handleBack}
           personalDetails={formData}
-    
+
         />
       )}
 
-{step === 10 &&  (
-        <BigFiveCalculator id={generatedId} 
-        onBack={handleBackHome} />
+      {step === 10 && (
+        <BigFiveCalculator id={generatedId}
+          onBack={handleBackHome} />
       )}
 
       {step === 4 && (
@@ -260,8 +260,11 @@ const App = () => {
         />
       )}
 
-      {step === 8 && <SearchResultPage status={status} trackingNumber = {TrackingId}
-          onBack={handleBackHome}/>}
+      {step === 8 &&
+        <SearchResultPage
+          status={status}
+          trackingNumber={TrackingId}
+          onBack={handleBackHome} />}
 
       {step === 9 && (
         <Confirmation
