@@ -80,7 +80,7 @@ const PositionForm = ({ personalDetails, onSubmit, onNext, onBack, onPositionCha
 
             <hr />
 
-            <p style={{ textAlign: "center" }}>Applying for position:</p>
+            <p style={{ textAlign: "center" }}><b>Applying for position:</b></p>
             <div align="center">
               <select
                 id="position"
@@ -103,12 +103,10 @@ const PositionForm = ({ personalDetails, onSubmit, onNext, onBack, onPositionCha
 
             <div className='formBorder'>
               <div className='pageContainer'>
-
                 <label
                   htmlFor="path"
                   className="block font-bold mb-2"
-                >
-                  How did you know about our company?
+                ><b>How did you know about our company?</b>
                 </label>
                 <br></br>
 
@@ -129,10 +127,12 @@ const PositionForm = ({ personalDetails, onSubmit, onNext, onBack, onPositionCha
                     </label>
                   </div>
                 ))}
+              </div>
+            </div>
 
-                <br></br>
-
-                <p>Please give an example of how you resolved a major conflict or contradiction that occurred with your parents?</p>
+            <div className='formBorder'>
+              <div className='pageContainer'>
+                <p><b>Please give an example of how you resolved a major conflict or contradiction that occurred with your parents?</b></p>
                 <MDBTextArea
                   style={{ display: "block", marginLeft: "auto", marginRight: "auto" }}
                   rows={5}
@@ -143,10 +143,12 @@ const PositionForm = ({ personalDetails, onSubmit, onNext, onBack, onPositionCha
                   required
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 />
+              </div>
+            </div>
 
-                <br></br><br></br>
-
-                <p>How do you handle pressure?</p>
+            <div className='formBorder'>
+              <div className='pageContainer'>
+                <p><b>How do you handle pressure?</b></p>
                 <MDBTextArea
                   style={{ display: "block", marginLeft: "auto", marginRight: "auto" }}
                   rows={5}
@@ -157,10 +159,12 @@ const PositionForm = ({ personalDetails, onSubmit, onNext, onBack, onPositionCha
                   required
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 />
+              </div>
+            </div>
 
-                <br></br><br></br>
-
-                <label htmlFor="input3" className="block font-bold mb-2">What skills do you possess that will help you succeed in this position?</label>
+            <div className='formBorder'>
+              <div className='pageContainer'>
+                <label htmlFor="input3" className="block font-bold mb-2"><b>What skills do you possess that will help you succeed in this position?</b></label>
                 <MDBTextArea
                   style={{ display: "block", marginLeft: "auto", marginRight: "auto" }}
                   rows={5}
@@ -171,11 +175,13 @@ const PositionForm = ({ personalDetails, onSubmit, onNext, onBack, onPositionCha
                   required
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 />
+              </div>
+            </div>
 
-                <br></br><br></br>
 
-                <div>
-                  <label htmlFor="input4" className="block font-bold mb-2">What are your career goals?</label>
+            <div className='formBorder'>
+              <div className='pageContainer'>
+                  <label htmlFor="input4" className="block font-bold mb-2"><b>What are your career goals?</b></label>
                   <MDBTextArea
                     style={{ display: "block", marginLeft: "auto", marginRight: "auto" }}
                     rows={5}
@@ -186,12 +192,12 @@ const PositionForm = ({ personalDetails, onSubmit, onNext, onBack, onPositionCha
                     required
                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   />
-                </div>
+              </div>
+            </div>
 
-                <br></br><br></br>
-
-                <div>
-                  <label htmlFor="input5" className="block font-bold mb-2">What makes you the best candidate for this position?</label>
+            <div className='formBorder'>
+              <div className='pageContainer'>
+                  <label htmlFor="input5" className="block font-bold mb-2"><b>What makes you the best candidate for this position?</b></label>
                   <MDBTextArea
                     style={{ display: "block", marginLeft: "auto", marginRight: "auto" }}
                     rows={5}
@@ -202,7 +208,6 @@ const PositionForm = ({ personalDetails, onSubmit, onNext, onBack, onPositionCha
                     required
                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   />
-                </div>
               </div>
             </div>
           </div>
