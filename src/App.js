@@ -247,7 +247,7 @@ const App = () => {
           selectedPosition={position}
           onSubmit={handleSaveFormData}
           onNext={handleNext}
-          onBack={handleBack}
+          onBack={handleBackHome}
         />
       )}
 
