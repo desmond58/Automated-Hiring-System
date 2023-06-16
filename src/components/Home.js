@@ -44,12 +44,12 @@ const Home = (props) => {
   return (
 
     <>
-      <MDBNavbar light bgColor='#F1FFEB' sticky>
+      <MDBNavbar light bgColor='white' sticky>
         <MDBContainer fluid>
           <MDBNavbarBrand>
             <img
               src={logo}
-              height='100'
+              height='85'
               alt=''
               loading='lazy'
             />
@@ -70,7 +70,7 @@ const Home = (props) => {
         </MDBContainer>
       </MDBNavbar>
 
-      <div className='p-5 text-center'>
+      <div className='homeContainer text-center'>
         <h1 className='mb-3'>Hi Welcome!</h1>
         <h4 className='mb-3'>Please click the button below to submit for an interview!</h4>
         <button className="button button1" type="submit" onClick={handleFormSubmit}>

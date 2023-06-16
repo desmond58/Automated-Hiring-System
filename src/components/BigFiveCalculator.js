@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { createClient } from '@supabase/supabase-js';
 import logo from "../images/huachanglogo.png";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import {
   MDBContainer,
   MDBNavbar,
@@ -9,7 +11,8 @@ import {
   MDBCardBody,
   MDBCardTitle,
   MDBCardText,
-  MDBFooter
+  MDBFooter,
+  MDBIcon,
 } from "mdb-react-ui-kit";
 
 const supabaseUrl = 'https://aehwgrirrnhmatqmqcsa.supabase.co';
@@ -110,6 +113,11 @@ const BigFiveCalculator = ({ onBack, id }) => {
     }
   }, [formData]);
 
+  const handleCopyClick = () => {
+    navigator.clipboard.writeText(trackingNumber);
+    toast.success('Copied to clipboard!', { autoClose: 500 });
+  };
+
   return (
     <>
 
@@ -138,7 +146,9 @@ const BigFiveCalculator = ({ onBack, id }) => {
               <MDBCardBody>
                 <MDBCardTitle>Tracking Number</MDBCardTitle>
                 <MDBCardText>
-                  {trackingNumber}
+                <input className = "inputcss"value={trackingNumber} disabled></input>             
+              <button className="trackButton track btn-sm" onClick={handleCopyClick}><MDBIcon far icon="copy" /></button>
+              <ToastContainer />
                 </MDBCardText>
               </MDBCardBody>
             </MDBCard>

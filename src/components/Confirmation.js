@@ -1,6 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import Marketing from './Marketing';
+import logo from '../images/huachanglogo.png';
 import { createClient } from '@supabase/supabase-js';
+import {
+  MDBFooter,
+  MDBContainer,
+  MDBRow,
+  MDBCol,
+  MDBNavbar,
+  MDBNavbarBrand,
+  MDBCard,
+  MDBCardBody,
+  MDBCardTitle,
+  MDBCardText,
+  MDBCardHeader,
+  MDBCardFooter,
+} from 'mdb-react-ui-kit';
 
 const supabaseUrl = 'https://aehwgrirrnhmatqmqcsa.supabase.co';
 const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFlaHdncmlycm5obWF0cW1xY3NhIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTY4MDg2NTg4MywiZXhwIjoxOTk2NDQxODgzfQ.DeXxoWY65kzpbvdxME16mAHj2KGMwDRg_jEGgUIxKc0';
@@ -86,55 +100,59 @@ const Confirmation = ({ combinedFormData, selectedPosition, onSubmit, onNext, on
     onBack(); // Call the onBack function to navigate back to the previous page
   };
   return (
-    <div>
-      <h2>Confirmation Page</h2>
-      <p>First Name: { combinedFormData.firstName}</p>
-      <p>Middle Name: { combinedFormData.middleName}</p>
-      <p>Last Name: { combinedFormData.lastName}</p>
-      <p>Gender: { combinedFormData.gender}</p>
-      <p>Date of Birth: { combinedFormData.dob}</p>
-      <p>Age: { combinedFormData.age}</p>
-      <p>NRIC: { combinedFormData.nric}</p>
-      <p>Place of Birth: { combinedFormData.pob}</p>
-      <p>Nationality: { combinedFormData.nationality}</p>
-      <p>Religion: { combinedFormData.religion}</p>
-      <p>Race: { combinedFormData.race}</p>
-      <p>Language Spoken: { combinedFormData.languageSpoken}</p>
-      <p>Language Written: { combinedFormData.languageWritten}</p>
-      <p>Working Skill Experiences: { combinedFormData.workingSkillExperiences}</p>
-      <p>Current Employer: { combinedFormData.currentEmployer}</p>
-      <p>Date of Joining: { combinedFormData.dateofjoining}</p>
-      <p>Position: { combinedFormData.position}</p>
-      <p>Salary: { combinedFormData.salary}</p>
-      <p>Health: { combinedFormData.health}</p>
-      <p>Diseases: { combinedFormData.diseases}</p>
-      <p>Expected Salary: { combinedFormData.expectedSalary}</p>
-      <p>Start Work Date: { combinedFormData.startWorkDate}</p>
+    <>
 
-        {/* Display position form data */}
-        <p>Path : {combinedFormData.pathList}</p>
-        <p>Input 1: {combinedFormData.inputp1}</p>
-      <p>Input 2: {combinedFormData.inputp2}</p>
-      <p>Input 3: {combinedFormData.inputp3}</p>
-      <p>Input 4: {combinedFormData.inputp4}</p>
-      <p>Input 5: {combinedFormData.inputp5}</p>
+      <MDBNavbar sticky bgColor='#F1FFEB'>
+        <MDBContainer className='justify-content-center'>
+          <MDBNavbarBrand href='#'>
+            <img
+              src={logo}
+              height='80'
+              alt=''
+              loading='lazy'
+            />
+          </MDBNavbarBrand>
+        </MDBContainer>
+      </MDBNavbar>
 
-      
-      <p>Selected Position: {selectedPosition}</p>
- {/* Display marketing form data */}
-      <p>SelectedPosition languageList: {combinedFormData.languageList}</p>
-      <p>SelectedPosition Input 1: {combinedFormData.input1}</p>
-      <p>SelectedPosition Input 2: {combinedFormData.input2}</p>
-      <p>SelectedPosition Input 3: {combinedFormData.input3}</p>
-      <p>SelectedPosition Input 4: {combinedFormData.input4}</p>
-      <p>SelectedPosition Input 5: {combinedFormData.input5}</p>
-      <p>SelectedPosition Input 6: {combinedFormData.input6}</p>
-      <p>SelectedPosition Input 7: {combinedFormData.input7}</p>
-      <p>SelectedPosition Input 8: {combinedFormData.input8}</p>
+      <div className='confirmationContainer'>
 
-      <button className='button buttonBack'  onClick={handleBack}>Back</button>
-      <button className='button buttonNext'  onClick={handleSubmit}>Submit</button>
-    </div>
+        <MDBCard alignment='center'>
+          <MDBCardHeader><h2><b>Application Intructions</b></h2></MDBCardHeader>
+          <MDBCardBody>
+            <MDBCardTitle></MDBCardTitle>
+            <MDBCardText><h4>Please make sure all your responses
+              are answered correctly. Click the button below to
+              submit this application. After you click the
+              "Submit" button you will be given a tracking
+              number. We will let you know if you qualify so
+              please try to follow the instructions to the
+              letter and status. Click the button below to
+              submit this application:</h4></MDBCardText>
+          </MDBCardBody>
+          <MDBCardFooter className='text-muted'>
+            <div class="d-flex justify-content-center">
+              <MDBRow>
+                <MDBCol>
+                  <button className='button buttonBack' onClick={handleBack}>Back</button>
+                </MDBCol>
+                <MDBCol>
+                  <button className='button buttonNext' onClick={handleSubmit}>Submit</button>
+                </MDBCol>
+              </MDBRow>
+            </div>
+          </MDBCardFooter>
+        </MDBCard>
+
+
+      </div>
+
+      <MDBFooter style={{ backgroundColor: "#F1FFEB" }} className='fixed-bottom'>
+        <div className='text-center p-4' style={{ backgroundColor: 'rgba(0, 0, 0, 0.05)' }}>
+          HUACHANG GROWMAX M SDN BHD
+        </div>
+      </MDBFooter>
+    </>
   );
 };
 

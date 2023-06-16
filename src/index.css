@@ -48,12 +48,15 @@ label {
   display: block;
 }
 
+.homeContainer {
+  margin: 10%;
+}
+
 .formContainer {
   margin-bottom: 50px;
   margin-left: 80px;
   margin-right: 80px;
 }
-
 
 .pageContainer {
   margin-left: 60px;
@@ -62,6 +65,19 @@ label {
   margin-bottom: 50px;
 }
 
+.confirmationContainer {
+  margin-left: 20%;
+  margin-right: 20%;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.trackContainer {
+  margin-left: 20%;
+  margin-right: 20%;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
 
 .formBorder {
   border: 0.5px solid lightgray;
@@ -86,4 +102,9 @@ label {
 
 .big5Container {
  margin: 30px;
+}
+
+.inputcss {
+  height: 40px;
+      
 }

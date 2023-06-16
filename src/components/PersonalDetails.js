@@ -247,7 +247,7 @@ const PersonalDetails = ({ step, setStep, onSaveFormData }) => {
   };
 
   const [dateOfBirth, setDateOfBirth] = useState('');
-  const [age, setAge] = useState('');
+  const [ageInput, setAge] = useState('');
 
   const handleInputChange = (event) => {
     const { name, value, type, checked } = event.target;
@@ -381,20 +381,19 @@ const PersonalDetails = ({ step, setStep, onSaveFormData }) => {
                     <MDBInput
                       name='age'
                       label='Age'
+                      //value={ageInput}
                       onChange={handleInputChange}
                     />
                   </MDBCol>
                 </MDBRow>
 
-                <MDBRow className='mb-4'>
-
-                </MDBRow>
-
+              
                 <MDBInput
                   name='nric'
                   label='NRIC/FIN No.'
                   onChange={handleInputChange}
                 />
+                < br />
                 <MDBRow>
                   <MDBCol>
                     <MDBInput
@@ -429,9 +428,8 @@ const PersonalDetails = ({ step, setStep, onSaveFormData }) => {
                       onChange={handleInputChange}
                     />
                   </MDBCol>
-
                 </MDBRow>
-
+                <br></br>
                 <MDBRow className='mb-4'>
                   <MDBCol>
                     <p>Religion</p>
