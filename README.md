@@ -2,6 +2,20 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+# Getting Started 
+| Tutorial Used | https://www.youtube.com/watch?v=jx5hdo50a2M |
+| -------- | --------------- |
+| Actions Required | 1. Install Node.js & Restart Visual Studio Code |
+|                  | 2. Run 'npm install supabase --save-dev' (Database) |
+|                  | 3. Run 'npm install mdb-react-ui-kit' (Modal) |
+|                  | 4. Run 'npm install react-toastify' (Toast) |
+
+| Extension Used | 1. EJ7+ React |
+| Library Used | 1. MDBootstrap |
+|  | 2. Supabase |
+|  | 3. Toastify |
+| Material/Template Used | 1. https://www.youtube.com/watch?v=nL9X--HNFrg |
+
 ## Available Scripts
 
 In the project directory, you can run:
