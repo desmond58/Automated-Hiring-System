@@ -135,6 +135,7 @@ const App = () => {
           onBack={handleBack}
           formData={formData}
           setFormData={setFormData}
+          onHome={handleBackHome}
         />
       )}
 
