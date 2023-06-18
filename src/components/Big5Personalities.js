@@ -185,7 +185,7 @@ const Big5Personalities = ({ personalDetails, supabase, onGenerateId, onNext, on
         <div className='formContainer'>
 
           <h2><b>Big Five Personalities Test</b></h2>
-          <p>Please fill out the form below to test which position is best for you.</p>
+          <p>Please complete the form below to test which position is best for you.</p>
           <hr />
 
           <div class="d-flex justify-content-center">
@@ -193,11 +193,11 @@ const Big5Personalities = ({ personalDetails, supabase, onGenerateId, onNext, on
               <MDBCardBody>
                 <MDBCardTitle>Rating:</MDBCardTitle>
                 <MDBCardText>
-                  1 = Disagree
-                  2 = Slightly disagree
-                  3 = Neutral
-                  4 = Slightly agree
-                  5 = Agree
+                  <b>1</b> = Disagree &nbsp;
+                  <b>2</b> = Slightly disagree &nbsp;
+                  <b>3</b> = Neutral &nbsp;
+                  <b>4</b> = Slightly agree &nbsp;
+                  <b>5</b> = Agree
                 </MDBCardText>
               </MDBCardBody>
             </MDBCard>
