@@ -13,7 +13,9 @@ import {
   MDBNavbar,
   MDBNavbarBrand,
   MDBInputGroup,
-  MDBInput
+  MDBInput,
+  MDBCarousel,
+  MDBCarouselItem,
 } from 'mdb-react-ui-kit';
 
 import { createClient } from '@supabase/supabase-js';
@@ -70,6 +72,7 @@ const Home = (props) => {
         </MDBContainer>
       </MDBNavbar>
 
+
       <div className='homeContainer text-center'>
         <h1 className='mb-3'>Hi Welcome!</h1>
         <h4 className='mb-3'>Please click the button below to submit for an interview!</h4>
@@ -77,6 +80,7 @@ const Home = (props) => {
           <span>APPLY NOW!</span>
         </button>
       </div>
+
 
       <MDBFooter className='text-center text-lg-start text-muted' style={{ backgroundColor: "#F1FFEB" }}>
         <section className='d-flex justify-content-center justify-content-lg-between p-4 border-bottom'>
@@ -91,7 +95,7 @@ const Home = (props) => {
             <a href='https://api.whatsapp.com/send/?phone=60133626778&text=Hi%2C+i+am+interested+to+know+more.+%28https%3A%2F%2Fwww.hcgm.com.my%29&type=phone_number&app_absent=0' className='me-4 text-reset' style={{ margin: '10px' }} target='_blank'>
               <MDBIcon fab icon="whatsapp" />
             </a>
-            <a href='' className='me-4 text-reset' style={{ margin: '10px' }} target='_blank'>
+            <a href='https://www.google.com/maps?q=2.820781,101.790268' className='me-4 text-reset' style={{ margin: '10px' }} target='_blank'>
               <MDBIcon fas icon="map-marker-alt" />
             </a>
           </div>

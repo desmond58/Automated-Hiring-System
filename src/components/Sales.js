@@ -59,12 +59,12 @@ const Sales = ({ combinedFormData, onSaveFormData, onNext, onBack }) => {
 
   return (
     <form onSubmit={submitHandler}>
-      <MDBNavbar sticky bgColor='#F1FFEB'>
+      <MDBNavbar sticky bgColor='white'>
         <MDBContainer className='justify-content-center'>
           <MDBNavbarBrand href='#'>
             <img
               src={logo}
-              height='100'
+              height='85'
               alt=''
               loading='lazy'
             />
