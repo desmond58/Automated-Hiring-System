@@ -9,6 +9,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 |                  | 2. Run 'npm install supabase --save-dev' (Database) |
 |                  | 3. Run 'npm install mdb-react-ui-kit' (Modal) |
 |                  | 4. Run 'npm install react-toastify' (Toast) |
+|                  | 5. Run 'npm i react-responsive-carousel' (Carousel) |
 
 | Extension Used | 1. EJ7+ React |
 | Library Used | 1. MDBootstrap |
