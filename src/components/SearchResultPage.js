@@ -86,6 +86,9 @@ const SearchResultPage = ({ trackingNumber, onBack }) => {
     fetchData();
   }, [trackingNumber]);
 
+  const handleHome = (e) => {
+    window.location.reload();
+};
   return (
     <>
       <MDBNavbar sticky bgColor='white'>
@@ -106,23 +109,24 @@ const SearchResultPage = ({ trackingNumber, onBack }) => {
           <div className="container mt-5">
             <div className="card p-5">
               <div class="d-flex justify-content-center">
-                <h2 className="mb-4">Interview Form Status</h2>
+                <h2 className="mb-4">Interview Status</h2>
               </div>
               <p className="mb-4">Hi <b>{firstName} {middleName} {lastName}</b>,</p>
-              <p>Your interview form is still under <b>{status}</b>.</p>
-              <p>Remark: {remark}</p>
+              <p>Your interview form is under <b>{status}</b>.</p>
+              <p>Remark: </p>
+              <p>{remark}</p>
             </div>
           </div>
         </div>
 
         <div class="d-flex justify-content-center">
-          <button className='button buttonNext' onClick={onBack}>Home</button>
+          <button className='button buttonNext' onClick={handleHome}>Home</button>
         </div>
 
       </div>
 
 
-      <MDBFooter style={{ backgroundColor: "#F1FFEB" }}>
+      <MDBFooter style={{ backgroundColor: "#F1FFEB" }} className='fixed-bottom'>
         <div className='text-center p-4' style={{ backgroundColor: 'rgba(0, 0, 0, 0.05)' }}>
           HUACHANG GROWMAX M SDN BHD
         </div>

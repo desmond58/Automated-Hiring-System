@@ -58,6 +58,10 @@ const TrackingNumberPage = ({ onBack }) => {
     toast.success('Copied to clipboard!', { autoClose: 500 });
   };
 
+  const handleHome = (e) => {
+      window.location.reload();
+  };
+
   return (
     <>
 
@@ -77,20 +81,40 @@ const TrackingNumberPage = ({ onBack }) => {
 
 
       <div className='trackContainer'>
+
+
+
         <div className='formBorder'>
+
           <div className='trackContainer'>
             <div className='text-center p-4'>
-              <h1>Your Tracking Number is: </h1>
+
+              <MDBIcon far icon="check-circle" size='5x' />
+              <h1>Submitted successfully! </h1>
+
+              <p>Your submisison is pending review.</p>
               <br />
-              <input className = "inputcss"value={trackingNumber} disabled></input>             
-              <button className="trackButton track btn-sm" onClick={handleCopyClick}><MDBIcon far icon="copy" /></button>
-              <ToastContainer />
+
+
             </div>
+            <div class="d-flex justify-content-center">
+              <MDBCard alignment='center'>
+                <MDBCardBody>
+                  <MDBCardTitle>Tracking Number:</MDBCardTitle>
+                  <MDBCardText>
+                    <input className="inputcss" value={trackingNumber} disabled></input>
+                    <button className="trackButton track btn-sm" onClick={handleCopyClick}><MDBIcon far icon="copy" /></button>
+                    <ToastContainer />
+                  </MDBCardText>
+                </MDBCardBody>
+              </MDBCard>
+            </div>
+
           </div>
         </div>
         <br />
         <div class="d-flex justify-content-center">
-          <button className='button buttonNext' onClick={onBack}>
+          <button className='button buttonNext' onClick={handleHome}>
             Home
           </button>
         </div>
@@ -100,7 +124,7 @@ const TrackingNumberPage = ({ onBack }) => {
 
 
 
-      <MDBFooter style={{ backgroundColor: "#F1FFEB" }} className='fixed-bottom'>
+      <MDBFooter style={{ backgroundColor: "#F1FFEB" }}>
         <div className='text-center p-4' style={{ backgroundColor: 'rgba(0, 0, 0, 0.05)' }}>
           HUACHANG GROWMAX M SDN BHD
         </div>

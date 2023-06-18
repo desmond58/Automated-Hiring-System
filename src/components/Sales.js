@@ -22,7 +22,7 @@ const Sales = ({ combinedFormData, onSaveFormData, onNext, onBack }) => {
   const [input5, setInput5] = useState("");
   const [input6, setInput6] = useState("");
 
-  const LanguageList = ["English", "Mandarin", "Bahasa Malaysia"];
+  const LanguageList = ["English", "Mandarin", "Bahasa Malaysia", "Cantonese", "Others"];
 
   const submitHandler = (event) => {
     event.preventDefault();

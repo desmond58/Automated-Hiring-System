@@ -83,6 +83,7 @@ const Confirmation = ({ combinedFormData, selectedPosition, onSubmit, onNext, on
       }
 
       console.log('Data inserted successfully:', data);
+      alert('Your application has been submitted successfully!')
       // Perform any further actions after successful submission
       // ...
 

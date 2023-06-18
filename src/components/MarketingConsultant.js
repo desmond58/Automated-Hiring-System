@@ -22,7 +22,7 @@ const MarketingConsultant = ({ combinedFormData, onSaveFormData, onNext, onBack 
   const [input6, setInput6] = useState("");
   const [input7, setInput7] = useState("");
   const [input8, setInput8] = useState("");
-  const LanguageList = ["English", "Mandarin", "Bahasa Malaysia"];
+  const LanguageList = ["English", "Mandarin", "Bahasa Malaysia", "Cantonese", "Others"];
 
   const submitHandler = (event) => {
     event.preventDefault();

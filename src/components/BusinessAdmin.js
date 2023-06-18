@@ -23,7 +23,7 @@ const BusinessAdministrative = ({ combinedFormData, onSaveFormData, onNext, onBa
   const [input6, setInput6] = useState("");
   const [input7, setInput7] = useState("");
 
-  const LanguageList = ["English", "Mandarin", "Bahasa Malaysia"];
+  const LanguageList = ["English", "Mandarin", "Bahasa Malaysia", "Cantonese", "Others"];
 
   const submitHandler = (event) => {
     event.preventDefault();

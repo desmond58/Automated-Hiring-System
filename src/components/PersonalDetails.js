@@ -105,7 +105,7 @@ const PersonalDetails = ({ step, setStep, onSaveFormData }) => {
     e.preventDefault();
     const confirmed = window.confirm('Are you sure you want to go back? Any unsaved changes will be lost.');
     if (confirmed) {
-      setStep(1);
+      window.location.reload();
     }
   };
 
@@ -252,10 +252,9 @@ const PersonalDetails = ({ step, setStep, onSaveFormData }) => {
     handleFormSubmit(newFormData, setStep(4));
   };
 
-  const [dateOfBirth, setDateOfBirth] = useState('');
-  const [ageInput, setAge] = useState('');
   const [health, setHealth] = useState('');
   const [diseases, setDiseases] = useState('');
+  //const [empty, setEmpty] = useState('');
 
   const handleInputChange = (event) => {
     const { name, value, type, checked } = event.target;
@@ -281,31 +280,26 @@ const PersonalDetails = ({ step, setStep, onSaveFormData }) => {
       setDiseases(value);
     }
 
+    if (name === "dob") {
+      const today = new Date();
+      const birthDate = new Date(value);
+      const age = today.getFullYear() - birthDate.getFullYear();
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        age: age.toString(),
+      }));
+    }
 
-
-
-    // if (name === 'dob') {
-    //   setDateOfBirth(value);
-    //   calculateAge(value);
-    // }
-    // You can remove this block if the age input is read-only and only used to display the calculated age
-    // if (name === 'age') {
-    //   setAge(value);
-    // }
+    // const isInputEmpty = event.target.value.trim() === '';
+    //   // Handle empty string value for non-required fields
+    //   if (isInputEmpty) {
+    //     setEmpty('');
+    //   }
+    //   else {
+    //     setEmpty(value);
+    //   }
   };
 
-  // const calculateAge = () => {
-  //   const birthDate = new Date(dateOfBirth);
-  //   const today = new Date();
-  //   const yearsDiff = today.getFullYear() - birthDate.getFullYear();
-
-  //   // Check if the birthday hasn't occurred yet this year
-  //   const hasNotHadBirthday = today.getMonth() < birthDate.getMonth() ||
-  //     (today.getMonth() === birthDate.getMonth() && today.getDate() < birthDate.getDate());
-
-  //   const calculatedAge = hasNotHadBirthday ? yearsDiff - 1 : yearsDiff;
-  //   setAge(calculatedAge.toString()); // Convert the age to a string before setting it in the state
-  // };
 
   const [basicModal, setBasicModal] = useState(false);
   const toggleShow = () => {
@@ -321,11 +315,11 @@ const PersonalDetails = ({ step, setStep, onSaveFormData }) => {
   };
 
 
-
   const handleClose = (e) => {
     e.preventDefault();
     setBasicModal(false);
   };
+
   const scrollContainerRef = useRef(null);
   const scrollToBottom = () => {
     scrollContainerRef.current.scrollTop = scrollContainerRef.current.scrollHeight;
@@ -333,7 +327,7 @@ const PersonalDetails = ({ step, setStep, onSaveFormData }) => {
 
   return (
     <>
-      <MDBNavbar sticky bgColor='#F1FFEB'>
+      <MDBNavbar sticky bgColor='white'>
         <MDBContainer className='justify-content-center'>
           <MDBNavbarBrand href='#'>
             <a onClick={backhandler}>
@@ -420,7 +414,7 @@ const PersonalDetails = ({ step, setStep, onSaveFormData }) => {
                     <MDBInput
                       name='age'
                       label='Age'
-                      //value={ageInput}
+                      value={formData.age || ""}
                       onChange={handleInputChange}
                       required
                     />
@@ -574,7 +568,7 @@ const PersonalDetails = ({ step, setStep, onSaveFormData }) => {
           <div className='formContainer'>
             <hr />
             <h2><b>Education / Academic Qualification</b></h2>
-            <p>Please attach copies of certificate</p>
+            <p>State your education or academic qualifications.</p>
             <hr />
 
             <div className='formBorder'>
@@ -593,41 +587,41 @@ const PersonalDetails = ({ step, setStep, onSaveFormData }) => {
                   <MDBTableBody>
                     <tr>
                       <th scope='row'>University/ College/ Technical</th>
-                      <td><MDBInput name='estName1' onChange={handleInputChange} required />
+                      <td><MDBInput name='estName1' onChange={handleInputChange} />
                       </td>
-                      <td><MDBInput name='from1' onChange={handleInputChange} required />
+                      <td><MDBInput name='from1' onChange={handleInputChange} />
                       </td>
-                      <td><MDBInput name='to1' onChange={handleInputChange} required />
+                      <td><MDBInput name='to1' onChange={handleInputChange} />
                       </td>
-                      <td><MDBInput name='fos1' onChange={handleInputChange} required />
+                      <td><MDBInput name='fos1' onChange={handleInputChange} />
                       </td>
-                      <td><MDBInput name='qual1' onChange={handleInputChange} required />
+                      <td><MDBInput name='qual1' onChange={handleInputChange} />
                       </td>
                     </tr>
                     <tr>
                       <th scope='row'>University/ College/ Technical</th>
-                      <td><MDBInput name='estName2' onChange={handleInputChange} required />
+                      <td><MDBInput name='estName2' onChange={handleInputChange} />
                       </td>
-                      <td><MDBInput name='from2' onChange={handleInputChange} required />
+                      <td><MDBInput name='from2' onChange={handleInputChange} />
                       </td>
-                      <td><MDBInput name='to2' onChange={handleInputChange} required />
+                      <td><MDBInput name='to2' onChange={handleInputChange} />
                       </td>
-                      <td><MDBInput name='fos2' onChange={handleInputChange} required />
+                      <td><MDBInput name='fos2' onChange={handleInputChange} />
                       </td>
-                      <td><MDBInput name='qual2' onChange={handleInputChange} required />
+                      <td><MDBInput name='qual2' onChange={handleInputChange} />
                       </td>
                     </tr>
                     <tr>
                       <th scope='row'>Secondary</th>
-                      <td><MDBInput name='estName3' onChange={handleInputChange} required />
+                      <td><MDBInput name='estName3' onChange={handleInputChange} />
                       </td>
-                      <td><MDBInput name='from3' onChange={handleInputChange} required />
+                      <td><MDBInput name='from3' onChange={handleInputChange} />
                       </td>
-                      <td><MDBInput name='to3' onChange={handleInputChange} required />
+                      <td><MDBInput name='to3' onChange={handleInputChange} />
                       </td>
-                      <td><MDBInput name='fos3' onChange={handleInputChange} required />
+                      <td><MDBInput name='fos3' onChange={handleInputChange} />
                       </td>
-                      <td><MDBInput name='qual3' onChange={handleInputChange} required />
+                      <td><MDBInput name='qual3' onChange={handleInputChange} />
                       </td>
                     </tr>
                   </MDBTableBody>
@@ -639,7 +633,7 @@ const PersonalDetails = ({ step, setStep, onSaveFormData }) => {
           <div className='formContainer'>
             <hr />
             <h2><b>Language</b></h2>
-            <p>Fill in the languages that you spoken and written.</p>
+            <p>State the languages that you spoken and written.</p>
             <hr />
             <div className='formBorder'>
               <div className='pageContainer'>
@@ -674,6 +668,7 @@ const PersonalDetails = ({ step, setStep, onSaveFormData }) => {
           <div className='formContainer'>
             <hr />
             <h2><b>Current Company</b></h2>
+            <p>State your current company.</p>
             <hr />
             <div className='formBorder'>
               <div className='pageContainer'>
@@ -700,6 +695,7 @@ const PersonalDetails = ({ step, setStep, onSaveFormData }) => {
           <div className='formContainer'>
             <hr />
             <h2><b>Employment History</b></h2>
+            <p>State your previous employments.</p>
             <hr />
             <div className='formBorder'>
               <div className='pageContainer'>
@@ -717,41 +713,41 @@ const PersonalDetails = ({ step, setStep, onSaveFormData }) => {
                   <MDBTableBody>
                     <tr>
                       <th scope='row'>1</th>
-                      <td><MDBInput name='nameOfEmployer1' onChange={handleInputChange} required />
+                      <td><MDBInput name='nameOfEmployer1' onChange={handleInputChange} />
                       </td>
-                      <td><MDBInput name='positionHeld1' onChange={handleInputChange} required />
+                      <td><MDBInput name='positionHeld1' onChange={handleInputChange} />
                       </td>
-                      <td><MDBInput name='em_from1' onChange={handleInputChange} required />
+                      <td><MDBInput name='em_from1' onChange={handleInputChange} />
                       </td>
-                      <td><MDBInput name='em_to1' onChange={handleInputChange} required />
+                      <td><MDBInput name='em_to1' onChange={handleInputChange} />
                       </td>
-                      <td><MDBInput name='reasonOfLeaving1' onChange={handleInputChange} required />
+                      <td><MDBInput name='reasonOfLeaving1' onChange={handleInputChange} />
                       </td>
                     </tr>
                     <tr>
                       <th scope='row'>2</th>
-                      <td><MDBInput name='nameOfEmployer2' onChange={handleInputChange} required />
+                      <td><MDBInput name='nameOfEmployer2' onChange={handleInputChange} />
                       </td>
-                      <td><MDBInput name='positionHeld2' onChange={handleInputChange} required />
+                      <td><MDBInput name='positionHeld2' onChange={handleInputChange} />
                       </td>
-                      <td><MDBInput name='em_from2' onChange={handleInputChange} required />
+                      <td><MDBInput name='em_from2' onChange={handleInputChange} />
                       </td>
-                      <td><MDBInput name='em_to2' onChange={handleInputChange} required />
+                      <td><MDBInput name='em_to2' onChange={handleInputChange} />
                       </td>
-                      <td><MDBInput name='reasonOfLeaving2' onChange={handleInputChange} required />
+                      <td><MDBInput name='reasonOfLeaving2' onChange={handleInputChange} />
                       </td>
                     </tr>
                     <tr>
                       <th scope='row'>3</th>
-                      <td><MDBInput name='nameOfEmployer3' onChange={handleInputChange} required />
+                      <td><MDBInput name='nameOfEmployer3' onChange={handleInputChange} />
                       </td>
-                      <td><MDBInput name='positionHeld3' onChange={handleInputChange} required />
+                      <td><MDBInput name='positionHeld3' onChange={handleInputChange} />
                       </td>
-                      <td><MDBInput name='em_from3' onChange={handleInputChange} required />
+                      <td><MDBInput name='em_from3' onChange={handleInputChange} />
                       </td>
-                      <td><MDBInput name='em_to3' onChange={handleInputChange} required />
+                      <td><MDBInput name='em_to3' onChange={handleInputChange} />
                       </td>
-                      <td><MDBInput name='reasonOfLeaving3' onChange={handleInputChange} required />
+                      <td><MDBInput name='reasonOfLeaving3' onChange={handleInputChange} />
                       </td>
                     </tr>
                   </MDBTableBody>
@@ -818,6 +814,7 @@ const PersonalDetails = ({ step, setStep, onSaveFormData }) => {
           <div className='formContainer'>
             <hr />
             <h2><b>Relatives working in Huachang Growmax</b></h2>
+            <p>State your relatives that work in Huachang Growmax Sdn Bhd, if any.</p>
             <hr />
             <div className='formBorder'>
               <div className='pageContainer'>
@@ -833,29 +830,29 @@ const PersonalDetails = ({ step, setStep, onSaveFormData }) => {
                   <MDBTableBody>
                     <tr>
                       <th scope='row'>1</th>
-                      <td><MDBInput name='rel_name1' onChange={handleInputChange} required />
+                      <td><MDBInput name='rel_name1' onChange={handleInputChange} />
                       </td>
-                      <td><MDBInput name='rel_branch1' onChange={handleInputChange} required />
+                      <td><MDBInput name='rel_branch1' onChange={handleInputChange} />
                       </td>
-                      <td><MDBInput name='rel_gender1' onChange={handleInputChange} required />
+                      <td><MDBInput name='rel_gender1' onChange={handleInputChange} />
                       </td>
                     </tr>
                     <tr>
                       <th scope='row'>2</th>
-                      <td><MDBInput name='rel_name2' onChange={handleInputChange} required />
+                      <td><MDBInput name='rel_name2' onChange={handleInputChange} />
                       </td>
-                      <td><MDBInput name='rel_branch2' onChange={handleInputChange} required />
+                      <td><MDBInput name='rel_branch2' onChange={handleInputChange} />
                       </td>
-                      <td><MDBInput name='rel_gender2' onChange={handleInputChange} required />
+                      <td><MDBInput name='rel_gender2' onChange={handleInputChange} />
                       </td>
                     </tr>
                     <tr>
                       <th scope='row'>3</th>
-                      <td><MDBInput name='rel_name3' onChange={handleInputChange} required />
+                      <td><MDBInput name='rel_name3' onChange={handleInputChange} />
                       </td>
-                      <td><MDBInput name='rel_branch3' onChange={handleInputChange} required />
+                      <td><MDBInput name='rel_branch3' onChange={handleInputChange} />
                       </td>
-                      <td><MDBInput name='rel_gender3' onChange={handleInputChange} required />
+                      <td><MDBInput name='rel_gender3' onChange={handleInputChange} />
                       </td>
                     </tr>
                   </MDBTableBody>
