@@ -41,6 +41,11 @@ const PositionForm = ({ personalDetails, onSubmit, onNext, onBack, onPositionCha
     console.log(combinedFormData);
     onNext(); // Move to the next step
 
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+
   };
 
   const backHandler = () => {
@@ -49,6 +54,11 @@ const PositionForm = ({ personalDetails, onSubmit, onNext, onBack, onPositionCha
     if (confirmed) {
       onBack();
     }
+
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
 
   };
 
