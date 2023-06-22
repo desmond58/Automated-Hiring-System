@@ -44,8 +44,11 @@ const PositionForm = ({ personalDetails, onSubmit, onNext, onBack, onPositionCha
   };
 
   const backHandler = () => {
-    onBack(); // Use onBack instead of props.onBack
-
+     // Use onBack instead of props.onBack
+    const confirmed = window.confirm('Are you sure you want to go back? Any unsaved changes will be lost.');
+    if (confirmed) {
+      onBack();
+    }
 
   };
 

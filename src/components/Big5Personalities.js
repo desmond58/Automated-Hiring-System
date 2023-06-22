@@ -157,7 +157,10 @@ const Big5Personalities = ({ personalDetails, supabase, onGenerateId, onNext, on
 
 
   const backHandler = () => {
-    onBack();
+    const confirmed = window.confirm('Are you sure you want to go back? Any unsaved changes will be lost.');
+    if (confirmed) {
+      onBack();
+    }
   };
 
 
